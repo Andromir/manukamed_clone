@@ -1,0 +1,14 @@
+[functions.create-order]
+verify_jwt = true
+
+[functions.order-status]
+verify_jwt = true
+
+[functions.admin-payments]
+verify_jwt = true
+
+[functions.admin-manage]
+verify_jwt = true
+
+[functions.admin-create-order]
+verify_jwt = true
