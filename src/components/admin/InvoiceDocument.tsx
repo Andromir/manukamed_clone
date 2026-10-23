@@ -186,7 +186,7 @@ export function InvoiceButtons({ order, onGenerate, invoice, loading }: { order:
       <!DOCTYPE html><html><head><meta charset="utf-8"><title>Račun ${invoice?.invoice_number ?? order.order_number}</title>
       <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: system-ui, sans-serif; padding: 48px; color: #1a2238; }
+        body { font-family: system-ui, sans-serif; padding: 48px; color: #141416; }
         table { border-collapse: collapse; width: 100%; }
         @media print { body { padding: 0; } }
       </style>

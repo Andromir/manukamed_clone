@@ -66,7 +66,7 @@ export default function AdminLayout() {
   if (!session || !isAdmin) return <Navigate to="/admin/prijava" replace />;
 
   return (
-    <div className="min-h-screen bg-[#f6f7fb] font-normal">
+    <div className="min-h-screen bg-mist-100 font-normal">
       <aside className="fixed inset-y-0 left-0 hidden w-64 lg:block">
         <Sidebar />
       </aside>

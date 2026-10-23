@@ -173,7 +173,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white lg:bg-[linear-gradient(to_right,#ffffff_50%,#f8f5ee_50%)]">
+    <div className="min-h-screen bg-white lg:bg-[linear-gradient(to_right,#ffffff_50%,#f3f3f4_50%)]">
       <div className="mx-auto grid max-w-6xl lg:grid-cols-2">
         <div className="px-5 py-8 sm:px-10 lg:border-r lg:border-ink-100 lg:py-12 lg:pr-14">
           <div className="flex items-center justify-between">

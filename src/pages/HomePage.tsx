@@ -50,12 +50,12 @@ export default function HomePage() {
             {home.heroImage ? (
               <img src={home.heroImage} alt="" className="max-h-[620px] w-full animate-fade-in rounded-3xl object-cover" />
             ) : (
-              <>
+              <div className="relative">
                 <BrandBall className="h-[420px] w-[420px] animate-scale-in drop-shadow-[0_40px_80px_rgba(228,34,4,0.35)]" />
                 {featured && (
                   <Link
                     to={`/izdelek/${featured.slug}`}
-                    className="group absolute bottom-6 left-0 flex w-72 animate-fade-up items-center gap-4 rounded-2xl bg-white p-3 text-ink-950 shadow-2xl transition-transform hover:-translate-y-1"
+                    className="group absolute -bottom-6 -left-16 flex w-80 animate-fade-up items-center gap-4 rounded-2xl bg-white p-3 text-ink-950 shadow-2xl transition-transform hover:-translate-y-1"
                     style={{ animationDelay: '0.6s' }}
                   >
                     <img src={featured.images[0]} alt="" className="h-20 w-16 shrink-0 rounded-xl bg-mist-100 object-cover" />
@@ -67,7 +67,7 @@ export default function HomePage() {
                     <ArrowUpRight className="h-5 w-5 shrink-0 text-ink-400 transition-colors group-hover:text-brand-600" />
                   </Link>
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>

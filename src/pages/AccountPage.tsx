@@ -155,7 +155,7 @@ export default function AccountPage() {
             </div>
             <h1 className="heading-lg mt-12">{mode === 'prijava' ? 'Dobrodošli nazaj' : 'Ustvarite račun'}</h1>
             <p className="mt-3 text-sm text-ink-800/70">
-              {mode === 'prijava' ? 'Prijavite se za pregled naročil in naročnin.' : 'Spremljajte naročila, shranite naslove in prejmite ekskluzivne ponudbe.'}
+              {mode === 'prijava' ? 'Prijavite se za pregled naročil in podatkov.' : 'Spremljajte naročila, shranite naslove in prejmite ekskluzivne ponudbe.'}
             </p>
             <form key={mode} onSubmit={handleAuth} className="mt-10 animate-fade-in space-y-4">
               {mode === 'registracija' && (
