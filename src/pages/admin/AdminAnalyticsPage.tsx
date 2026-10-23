@@ -64,9 +64,9 @@ function GoogleAnalyticsCard() {
             </div>
           )}
         </div>
-        <ol className="space-y-2 rounded-lg bg-navy-50/60 p-4 text-sm text-navy-800">
+        <ol className="space-y-2 rounded-lg bg-ink-50/60 p-4 text-sm text-ink-800">
           <li>1. Prijavite se na analytics.google.com z Google računom.</li>
-          <li>2. Ustvarite lastnost (Property) za manukamed.si.</li>
+          <li>2. Ustvarite lastnost (Property) za brandspot.si.</li>
           <li>3. Dodajte spletni podatkovni tok (Web) z naslovom vaše strani.</li>
           <li>4. Kopirajte ID meritve, ki se začne z G-, in ga prilepite sem.</li>
         </ol>
@@ -97,13 +97,13 @@ export default function AdminAnalyticsPage() {
         title="Analitika"
         description="Prodaja iz vaše trgovine in povezava z Google Analytics."
         actions={
-          <div className="flex rounded-lg border border-navy-100 bg-white p-1">
+          <div className="flex rounded-lg border border-ink-100 bg-white p-1">
             {ranges.map((r) => (
               <button
                 key={r}
                 type="button"
                 onClick={() => setDays(r)}
-                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${days === r ? 'bg-navy-900 text-white' : 'text-navy-800/70 hover:bg-navy-50'}`}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${days === r ? 'bg-ink-900 text-white' : 'text-ink-800/70 hover:bg-ink-50'}`}
               >
                 {r} dni
               </button>
@@ -126,8 +126,8 @@ export default function AdminAnalyticsPage() {
               ['Preklicana', String(summary.cancelled)],
             ].map(([label, value]) => (
               <div key={label} className="admin-card">
-                <p className="text-sm text-navy-800/60">{label}</p>
-                <p className="mt-2 text-2xl font-medium tracking-tight text-navy-900">{value}</p>
+                <p className="text-sm text-ink-800/60">{label}</p>
+                <p className="mt-2 text-2xl font-medium tracking-tight text-ink-900">{value}</p>
               </div>
             ))}
           </div>
@@ -139,20 +139,20 @@ export default function AdminAnalyticsPage() {
           <div className="grid gap-6 lg:grid-cols-2">
             <Card title="Najbolje prodajani izdelki">
               {top.length === 0 ? (
-                <p className="py-6 text-center text-sm text-navy-800/50">V tem obdobju ni prodaje.</p>
+                <p className="py-6 text-center text-sm text-ink-800/50">V tem obdobju ni prodaje.</p>
               ) : (
                 <ul className="space-y-3">
                   {top.map((p) => (
                     <li key={p.slug}>
                       <div className="flex justify-between gap-4 text-sm">
-                        <span className="truncate text-navy-900">{p.name}</span>
-                        <span className="shrink-0 font-medium text-navy-900">{formatEur(p.revenue)}</span>
+                        <span className="truncate text-ink-900">{p.name}</span>
+                        <span className="shrink-0 font-medium text-ink-900">{formatEur(p.revenue)}</span>
                       </div>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-navy-50">
-                          <div className="h-full rounded-full bg-gold-500 transition-all duration-700" style={{ width: `${(p.revenue / top[0].revenue) * 100}%` }} />
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-50">
+                          <div className="h-full rounded-full bg-brand-500 transition-all duration-700" style={{ width: `${(p.revenue / top[0].revenue) * 100}%` }} />
                         </div>
-                        <span className="w-14 text-right text-xs text-navy-800/50">{p.qty} kos</span>
+                        <span className="w-14 text-right text-xs text-ink-800/50">{p.qty} kos</span>
                       </div>
                     </li>
                   ))}
@@ -162,14 +162,14 @@ export default function AdminAnalyticsPage() {
 
             <Card title="Plačilne metode">
               {payments.length === 0 ? (
-                <p className="py-6 text-center text-sm text-navy-800/50">V tem obdobju ni prodaje.</p>
+                <p className="py-6 text-center text-sm text-ink-800/50">V tem obdobju ni prodaje.</p>
               ) : (
-                <ul className="divide-y divide-navy-50">
+                <ul className="divide-y divide-ink-50">
                   {payments.map((p) => (
                     <li key={p.method} className="flex items-center justify-between py-3 text-sm">
-                      <span className="text-navy-900">{PAYMENT_METHOD_LABELS[p.method] ?? p.method}</span>
-                      <span className="text-navy-800/60">
-                        {p.orders} naročil · <span className="font-medium text-navy-900">{formatEur(p.revenue)}</span>
+                      <span className="text-ink-900">{PAYMENT_METHOD_LABELS[p.method] ?? p.method}</span>
+                      <span className="text-ink-800/60">
+                        {p.orders} naročil · <span className="font-medium text-ink-900">{formatEur(p.revenue)}</span>
                       </span>
                     </li>
                   ))}

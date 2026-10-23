@@ -67,17 +67,17 @@ export default function AdminOrdersPage() {
 
       <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-300" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" />
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Številka, ime ali e-pošta" className="admin-input pl-9" />
         </div>
-        <div className="flex gap-1 overflow-x-auto rounded-lg border border-navy-100 bg-white p-1">
+        <div className="flex gap-1 overflow-x-auto rounded-lg border border-ink-100 bg-white p-1">
           {[{ id: '', label: 'Vsa' }, ...ORDER_STATUSES].map((s) => (
             <button
               key={s.id}
               type="button"
               onClick={() => update({ status: s.id, stran: '' })}
               className={`whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-                status === s.id ? 'bg-navy-900 text-white' : 'text-navy-800/70 hover:bg-navy-50'
+                status === s.id ? 'bg-ink-900 text-white' : 'text-ink-800/70 hover:bg-ink-50'
               }`}
             >
               {s.label}
@@ -91,10 +91,10 @@ export default function AdminOrdersPage() {
       {!rows ? (
         <LoadingBlock />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-navy-100 bg-white">
+        <div className="overflow-hidden rounded-xl border border-ink-100 bg-white">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-sm">
-              <thead className="border-b border-navy-100 bg-navy-50/50 text-left text-xs uppercase tracking-wider text-navy-800/60">
+              <thead className="border-b border-ink-100 bg-ink-50/50 text-left text-xs uppercase tracking-wider text-ink-800/60">
                 <tr>
                   <th className="px-4 py-3 font-medium">Naročilo</th>
                   <th className="px-4 py-3 font-medium">Kupec</th>
@@ -103,17 +103,17 @@ export default function AdminOrdersPage() {
                   <th className="px-4 py-3 text-right font-medium">Znesek</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-navy-50">
+              <tbody className="divide-y divide-ink-50">
                 {rows.map((o) => (
-                  <tr key={o.id} className="group transition-colors hover:bg-navy-50/40">
+                  <tr key={o.id} className="group transition-colors hover:bg-ink-50/40">
                     <td className="px-4 py-3">
                       <Link to={`/admin/narocila/${o.id}`} className="block">
-                        <span className="font-medium text-navy-900 group-hover:underline">{o.order_number}</span>
-                        <span className="block text-xs text-navy-800/50">{formatDateTime(o.created_at)}</span>
+                        <span className="font-medium text-ink-900 group-hover:underline">{o.order_number}</span>
+                        <span className="block text-xs text-ink-800/50">{formatDateTime(o.created_at)}</span>
                       </Link>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="flex items-center gap-2 text-navy-900">
+                      <span className="flex items-center gap-2 text-ink-900">
                         {o.first_name} {o.last_name}
                         <span
                           className={`rounded-full px-2 py-0.5 text-[10px] font-medium ring-1 ring-inset ${
@@ -123,23 +123,23 @@ export default function AdminOrdersPage() {
                           {o.user_id ? 'Registriran kupec' : 'Gost'}
                         </span>
                       </span>
-                      <span className="block text-xs text-navy-800/50">{o.email}</span>
+                      <span className="block text-xs text-ink-800/50">{o.email}</span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="mb-1 block text-xs text-navy-800/60">{PAYMENT_METHOD_LABELS[o.payment_method] ?? o.payment_method}</span>
+                      <span className="mb-1 block text-xs text-ink-800/60">{PAYMENT_METHOD_LABELS[o.payment_method] ?? o.payment_method}</span>
                       <PaymentStatusBadge status={o.payment_status} />
                     </td>
                     <td className="px-4 py-3">
                       <OrderStatusBadge status={o.status} />
                     </td>
-                    <td className="px-4 py-3 text-right font-medium text-navy-900">
+                    <td className="px-4 py-3 text-right font-medium text-ink-900">
                       <Link to={`/admin/narocila/${o.id}`}>{formatEur(Number(o.total))}</Link>
                     </td>
                   </tr>
                 ))}
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-4 py-16 text-center text-navy-800/50">
+                    <td colSpan={5} className="px-4 py-16 text-center text-ink-800/50">
                       Ni naročil.
                     </td>
                   </tr>
@@ -148,7 +148,7 @@ export default function AdminOrdersPage() {
             </table>
           </div>
           {pages > 1 && (
-            <div className="flex items-center justify-between border-t border-navy-100 px-4 py-3 text-sm text-navy-800/70">
+            <div className="flex items-center justify-between border-t border-ink-100 px-4 py-3 text-sm text-ink-800/70">
               <span>
                 Stran {page + 1} od {pages}
               </span>

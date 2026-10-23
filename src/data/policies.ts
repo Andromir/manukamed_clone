@@ -11,21 +11,21 @@ export const policies: Policy[] = [
     sections: [
       {
         heading: 'Stroški dostave',
-        text: 'Dostava po Sloveniji stane 3,90 €. Za naročila v vrednosti nad 50 € je dostava brezplačna.',
+        text: 'Strošek dostave je prikazan v košarici in na blagajni, preden oddate naročilo. Nad zneskom, navedenim na vrhu strani, je dostava po Sloveniji brezplačna.',
       },
       {
         heading: 'Rok dostave',
-        text: 'Naročila, oddana do 12. ure na delovni dan, odpošljemo isti dan. Paket običajno prejmete v 1–2 delovnih dneh.',
+        text: 'Naročila, oddana do 12. ure na delovni dan, odpošljemo isti dan. Paket običajno prejmete v 1–3 delovnih dneh.',
       },
       {
-        heading: 'Načini dostave',
-        text: 'Pakete dostavljamo s Pošto Slovenije in z dostavno službo GLS. Ob odpremi prejmete e-poštno sporočilo s številko za sledenje.',
+        heading: 'Sledenje pošiljki',
+        text: 'Ob odpremi prejmete e-poštno sporočilo s številko za sledenje pošiljki.',
       },
     ],
   },
   {
     slug: 'vracila',
-    title: 'Vračila in odstop od pogodbe',
+    title: 'Vračila in garancija',
     sections: [
       {
         heading: 'Pravica do odstopa',
@@ -33,11 +33,15 @@ export const policies: Policy[] = [
       },
       {
         heading: 'Pogoji vračila',
-        text: 'Zaradi higienskih razlogov lahko vrnete le neodprte izdelke z nepoškodovano zaščitno folijo. Neposredne stroške vračila nosi kupec.',
+        text: 'Izdelek vrnite nepoškodovan, v originalni embalaži in z vso priloženo opremo. Neposredne stroške vračila nosi kupec.',
       },
       {
         heading: 'Vračilo kupnine',
         text: 'Kupnino vrnemo najkasneje v 14 dneh po prejemu obvestila o odstopu, vendar ne prej, kot prejmemo vrnjeno blago.',
+      },
+      {
+        heading: 'Garancija in reklamacije',
+        text: 'Za izdelke velja garancija proizvajalca in zakonska odgovornost za stvarne napake. Reklamacijo sporočite na naš e-poštni naslov s številko naročila in opisom napake.',
       },
     ],
   },
@@ -47,7 +51,7 @@ export const policies: Policy[] = [
     sections: [
       {
         heading: 'Upravljavec osebnih podatkov',
-        text: 'Upravljavec osebnih podatkov je ManukaMed. Vaše podatke obdelujemo v skladu s Splošno uredbo o varstvu podatkov (GDPR) in ZVOP-2.',
+        text: 'Upravljavec osebnih podatkov je Brandspot. Vaše podatke obdelujemo v skladu s Splošno uredbo o varstvu podatkov (GDPR) in ZVOP-2.',
       },
       {
         heading: 'Namen obdelave',
@@ -65,7 +69,7 @@ export const policies: Policy[] = [
     sections: [
       {
         heading: 'Splošno',
-        text: 'Splošni pogoji veljajo za vse nakupe v spletni trgovini ManukaMed. Z oddajo naročila kupec potrjuje, da je seznanjen s pogoji in se z njimi strinja.',
+        text: 'Splošni pogoji veljajo za vse nakupe v spletni trgovini Brandspot. Z oddajo naročila kupec potrjuje, da je seznanjen s pogoji in se z njimi strinja.',
       },
       {
         heading: 'Cene',
@@ -73,7 +77,7 @@ export const policies: Policy[] = [
       },
       {
         heading: 'Plačilo',
-        text: 'Plačilo je mogoče s plačilno kartico, prek PayPala, z bančnim nakazilom ali po povzetju.',
+        text: 'Na voljo so načini plačila, prikazani na blagajni ob oddaji naročila.',
       },
     ],
   },

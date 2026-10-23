@@ -1,4 +1,4 @@
-export type CategorySlug = 'manuka-med' | 'ostali-izdelki';
+export type CategorySlug = 'telefoni' | 'racunalniki' | 'tv-in-avdio' | 'omrezje' | 'dodatki';
 
 export interface Category {
   slug: CategorySlug;
@@ -6,7 +6,6 @@ export interface Category {
   title: string;
   subtitle: string;
   intro: string;
-  heroImage: string;
 }
 
 export interface ProductVariant {
@@ -23,7 +22,6 @@ export interface Product {
   slug: string;
   name: string;
   category: CategorySlug;
-  mgo?: number;
   badge?: string;
   short: string;
   description: string;
@@ -46,31 +44,56 @@ export interface Product {
 
 export const categories: Category[] = [
   {
-    slug: 'manuka-med',
-    name: 'Manuka med',
-    title: 'Pristen manuka med',
-    subtitle: 'Notranja in zunanja vitalnost',
-    intro:
-      'Certificiran MGO™ manuka med iz Nove Zelandije. Vsaka serija je testirana, da vsebuje toliko metilglioksala, kot je navedeno na etiketi.',
-    heroImage: 'https://images.pexels.com/photos/4921856/pexels-photo-4921856.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    slug: 'telefoni',
+    name: 'Telefoni',
+    title: 'Telefoni',
+    subtitle: 'Pametni telefoni in nosljive naprave',
+    intro: 'Najnovejši pametni telefoni, pametne ure in brezžične slušalke vodilnih proizvajalcev.',
   },
   {
-    slug: 'ostali-izdelki',
-    name: 'Ostali izdelki',
-    title: 'Ostali izdelki',
-    subtitle: 'Propolis, kozmetika, dodatki in nega',
-    intro:
-      'Propolis, pastile, kozmetika z manuka medom, prehranska dopolnila in drugi naravni izdelki iz Nove Zelandije in beyond.',
-    heroImage: 'https://images.pexels.com/photos/8101134/pexels-photo-8101134.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    slug: 'racunalniki',
+    name: 'Računalniki',
+    title: 'Računalniki in tablice',
+    subtitle: 'Prenosniki, tablice in periferija',
+    intro: 'Prenosni računalniki, tablice, miške in tipkovnice za delo, šolo in igranje.',
+  },
+  {
+    slug: 'tv-in-avdio',
+    name: 'TV in avdio',
+    title: 'TV in avdio',
+    subtitle: 'Televizorji, zvočniki in pretočne naprave',
+    intro: 'Pametni televizorji, pretočne naprave, zvočniki in slušalke za domačo zabavo.',
+  },
+  {
+    slug: 'omrezje',
+    name: 'Omrežje',
+    title: 'Omrežje in pametni dom',
+    subtitle: 'Wi-Fi, mesh sistemi in pametni dom',
+    intro: 'Usmerjevalniki, mesh sistemi in pametne naprave za hitro in zanesljivo povezavo v vsakem kotu doma.',
+  },
+  {
+    slug: 'dodatki',
+    name: 'Dodatki',
+    title: 'Dodatki',
+    subtitle: 'Polnilci, kabli in zaščita',
+    intro: 'Polnilci, kabli, ovitki in drugi dodatki, ki vašim napravam pomagajo dati največ.',
   },
 ];
+
+// Product columns keep their original database names; these are their storefront meanings.
+export const productDetailLabels = {
+  howToUse: 'Ključne lastnosti',
+  taste: 'Vsebina paketa',
+  ingredients: 'Združljivost',
+  allergy: 'Garancija in opozorila',
+  nutrition: 'Tehnične specifikacije',
+} as const;
 
 export interface ProductRow {
   id: string;
   slug: string;
   name: string;
   category: CategorySlug;
-  mgo: number | null;
   badge: string | null;
   short: string;
   description: string;
@@ -96,7 +119,6 @@ export function mapProduct(r: ProductRow): Product {
     slug: r.slug,
     name: r.name,
     category: r.category,
-    mgo: r.mgo ?? undefined,
     badge: r.badge || undefined,
     short: r.short ?? '',
     description: r.description ?? '',

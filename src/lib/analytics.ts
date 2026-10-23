@@ -1,5 +1,5 @@
-const CONSENT_KEY = 'mm-cookie-consent';
-const OPEN_EVENT = 'mm:cookie-settings';
+const CONSENT_KEY = 'bs-cookie-consent';
+const OPEN_EVENT = 'bs:cookie-settings';
 
 export type Consent = 'granted' | 'denied';
 

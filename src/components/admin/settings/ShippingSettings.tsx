@@ -17,18 +17,18 @@ export default function ShippingSettings({ value, onChange }: Props) {
       <Card title="Načini dostave" description="Kupec na blagajni izbere enega od vključenih načinov. Prvi vključen način se uporablja za izračun v košarici.">
         <div className="space-y-4">
           {methods.map((m, i) => (
-            <div key={m.id} className={`rounded-xl border p-4 transition-colors ${m.enabled ? 'border-navy-100' : 'border-dashed border-navy-100 bg-navy-50/30'}`}>
+            <div key={m.id} className={`rounded-xl border p-4 transition-colors ${m.enabled ? 'border-ink-100' : 'border-dashed border-ink-100 bg-ink-50/30'}`}>
               <div className="mb-4 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <Toggle checked={m.enabled} onChange={(v) => setMethod(i, { enabled: v })} label={`Vključi ${m.label}`} />
-                  <span className="text-sm font-medium text-navy-900">{m.label || 'Nov način dostave'}</span>
+                  <span className="text-sm font-medium text-ink-900">{m.label || 'Nov način dostave'}</span>
                 </div>
                 <button
                   type="button"
                   disabled={methods.length === 1}
                   onClick={() => onChange({ shipping_methods: methods.filter((_, j) => j !== i) })}
                   aria-label="Odstrani način dostave"
-                  className="rounded-lg p-2 text-navy-300 hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
+                  className="rounded-lg p-2 text-ink-300 hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>

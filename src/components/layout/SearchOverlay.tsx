@@ -28,35 +28,35 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50">
-      <div className="absolute inset-0 animate-fade-in bg-navy-950/60" onClick={onClose} />
+      <div className="absolute inset-0 animate-fade-in bg-ink-950/60" onClick={onClose} />
       <div className="relative animate-fade-up bg-white">
         <div className="container-x py-8">
-          <div className="flex items-center gap-4 border-b border-navy-900 pb-4">
-            <Search className="h-5 w-5 text-navy-700" strokeWidth={1.5} />
+          <div className="flex items-center gap-4 border-b border-ink-900 pb-4">
+            <Search className="h-5 w-5 text-ink-700" strokeWidth={1.5} />
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Iščite izdelke, npr. MGO 250+"
-              className="flex-1 bg-transparent text-xl font-light text-navy-900 placeholder:text-navy-300 focus:outline-none"
+              placeholder="Iščite izdelke, npr. telefon ali slušalke"
+              className="flex-1 bg-transparent text-xl font-light text-ink-900 placeholder:text-ink-300 focus:outline-none"
             />
-            <button type="button" onClick={onClose} aria-label="Zapri iskanje" className="text-navy-900 hover:text-gold-500">
+            <button type="button" onClick={onClose} aria-label="Zapri iskanje" className="text-ink-900 hover:text-brand-500">
               <X className="h-6 w-6" strokeWidth={1.5} />
             </button>
           </div>
           {query.trim() && (
             <div className="mt-6">
               {results.length === 0 ? (
-                <p className="py-6 text-sm text-navy-800/60">Za »{query}« ni zadetkov.</p>
+                <p className="py-6 text-sm text-ink-800/60">Za »{query}« ni zadetkov.</p>
               ) : (
                 <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {results.map((p) => (
                     <li key={p.slug}>
-                      <Link to={`/izdelek/${p.slug}`} onClick={onClose} className="group flex items-center gap-4 p-2 transition-colors hover:bg-cream-100">
-                        <img src={p.images[0]} alt={p.name} className="h-16 w-16 object-cover" />
+                      <Link to={`/izdelek/${p.slug}`} onClick={onClose} className="group flex items-center gap-4 rounded-xl p-2 transition-colors hover:bg-mist-100">
+                        <img src={p.images[0]} alt={p.name} className="h-16 w-16 rounded-lg bg-mist-100 object-cover" />
                         <span>
-                          <span className="block text-sm text-navy-900 group-hover:text-gold-600">{p.name}</span>
-                          <span className="text-xs text-navy-800/60">od {formatPrice(p.variants[0].price)}</span>
+                          <span className="block text-sm text-ink-900 group-hover:text-brand-600">{p.name}</span>
+                          <span className="text-xs text-ink-800/60">od {formatPrice(p.variants[0].price)}</span>
                         </span>
                       </Link>
                     </li>

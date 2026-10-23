@@ -182,7 +182,7 @@ export default function AdminOrderCreatePage() {
 
   return (
     <div className="animate-fade-in">
-      <Link to="/admin/narocila" className="mb-4 inline-flex items-center gap-1 text-sm text-navy-700 hover:text-navy-900">
+      <Link to="/admin/narocila" className="mb-4 inline-flex items-center gap-1 text-sm text-ink-700 hover:text-ink-900">
         <ArrowLeft className="h-4 w-4" /> Nazaj na naročila
       </Link>
       <PageHeader title="Ustvari naročilo" description="Ročno ustvari naročilo za stranko." />
@@ -194,7 +194,7 @@ export default function AdminOrderCreatePage() {
           <Card title="Izdelki">
             <div className="mb-4 flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-300" />
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" />
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -210,8 +210,8 @@ export default function AdminOrderCreatePage() {
                 </select>
               )}
             </div>
-            <div className="max-h-48 overflow-y-auto rounded-lg border border-navy-100">
-              {filteredProducts.length === 0 && <p className="p-4 text-center text-sm text-navy-800/50">Ni najdenih izdelkov.</p>}
+            <div className="max-h-48 overflow-y-auto rounded-lg border border-ink-100">
+              {filteredProducts.length === 0 && <p className="p-4 text-center text-sm text-ink-800/50">Ni najdenih izdelkov.</p>}
               {filteredProducts.map((p) => {
                 const available = p.stock - inCart(p.slug);
                 return (
@@ -220,14 +220,14 @@ export default function AdminOrderCreatePage() {
                   type="button"
                   disabled={available <= 0}
                   onClick={() => { setSelectedSlug(p.slug); setSelectedSize(p.variants[0]?.size ?? ''); }}
-                  className={`flex w-full items-center gap-3 border-b border-navy-50 px-4 py-3 text-left transition-colors enabled:hover:bg-navy-50/50 disabled:cursor-not-allowed disabled:opacity-50 ${selectedSlug === p.slug ? 'bg-navy-50' : ''}`}
+                  className={`flex w-full items-center gap-3 border-b border-ink-50 px-4 py-3 text-left transition-colors enabled:hover:bg-ink-50/50 disabled:cursor-not-allowed disabled:opacity-50 ${selectedSlug === p.slug ? 'bg-ink-50' : ''}`}
                 >
-                  <span className="h-10 w-10 shrink-0 overflow-hidden rounded bg-cream-100">
+                  <span className="h-10 w-10 shrink-0 overflow-hidden rounded bg-mist-100">
                     {p.images[0] && <img src={p.images[0]} alt="" className="h-full w-full object-cover" />}
                   </span>
                   <span className="flex-1">
-                    <span className="block text-sm font-medium text-navy-900">{p.name}</span>
-                    <span className="block text-xs text-navy-800/50">{p.variants.map((v) => `${v.size || 'std'} ${formatEur(v.price)}`).join(' · ')}</span>
+                    <span className="block text-sm font-medium text-ink-900">{p.name}</span>
+                    <span className="block text-xs text-ink-800/50">{p.variants.map((v) => `${v.size || 'std'} ${formatEur(v.price)}`).join(' · ')}</span>
                   </span>
                   <span
                     className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
@@ -245,22 +245,22 @@ export default function AdminOrderCreatePage() {
             </button>
 
             {items.length > 0 && (
-              <ul className="mt-4 divide-y divide-navy-50">
+              <ul className="mt-4 divide-y divide-ink-50">
                 {items.map((it, idx) => (
                   <li key={idx} className="flex items-center gap-3 py-3">
-                    <span className="h-10 w-10 shrink-0 overflow-hidden rounded bg-cream-100">
+                    <span className="h-10 w-10 shrink-0 overflow-hidden rounded bg-mist-100">
                       {it.image && <img src={it.image} alt="" className="h-full w-full object-cover" />}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-navy-900">{it.name}</p>
-                      <p className="text-xs text-navy-800/50">{it.size || 'standard'} · {formatEur(it.unitPrice)}</p>
+                      <p className="text-sm font-medium text-ink-900">{it.name}</p>
+                      <p className="text-xs text-ink-800/50">{it.size || 'standard'} · {formatEur(it.unitPrice)}</p>
                     </div>
                     <input
                       type="number" min={1} max={Math.min(99, it.stock)} value={it.qty}
                       onChange={(e) => updateQty(idx, Number(e.target.value))}
                       className="admin-input w-16 text-center"
                     />
-                    <span className="w-20 text-right text-sm font-medium text-navy-900">{formatEur(it.unitPrice * it.qty)}</span>
+                    <span className="w-20 text-right text-sm font-medium text-ink-900">{formatEur(it.unitPrice * it.qty)}</span>
                     <button type="button" onClick={() => removeItem(idx)} className="rounded-lg p-2 text-red-500 hover:bg-red-50">
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -293,7 +293,7 @@ export default function AdminOrderCreatePage() {
                 <input required value={form.last_name} onChange={(e) => setForm((f) => ({ ...f, last_name: e.target.value }))} className="admin-input" />
               </Field>
               <Field label="E-pošta" className="sm:col-span-2">
-                <input type="email" required readOnly={!!customerId} value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className={`admin-input ${customerId ? 'bg-navy-50/60 text-navy-800/70' : ''}`} />
+                <input type="email" required readOnly={!!customerId} value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className={`admin-input ${customerId ? 'bg-ink-50/60 text-ink-800/70' : ''}`} />
               </Field>
               <Field label="Telefon">
                 <input required value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} className="admin-input" />
@@ -322,21 +322,21 @@ export default function AdminOrderCreatePage() {
         <div className="space-y-6">
           <Card title="Povzetek">
             <dl className="space-y-2 text-sm">
-              <div className="flex justify-between text-navy-800/70">
+              <div className="flex justify-between text-ink-800/70">
                 <dt>Vmesni seštevek</dt>
                 <dd>{formatEur(subtotal)}</dd>
               </div>
-              <div className="flex justify-between text-navy-800/70">
+              <div className="flex justify-between text-ink-800/70">
                 <dt>Dostava</dt>
                 <dd>{shippingCost === 0 ? 'Brezplačno' : formatEur(shippingCost)}</dd>
               </div>
               {paymentFee > 0 && (
-                <div className="flex justify-between text-navy-800/70">
+                <div className="flex justify-between text-ink-800/70">
                   <dt>Strošek plačila</dt>
                   <dd>{formatEur(paymentFee)}</dd>
                 </div>
               )}
-              <div className="flex justify-between border-t border-navy-100 pt-2 text-base font-medium text-navy-900">
+              <div className="flex justify-between border-t border-ink-100 pt-2 text-base font-medium text-ink-900">
                 <dt>Skupaj</dt>
                 <dd>{formatEur(total)}</dd>
               </div>
