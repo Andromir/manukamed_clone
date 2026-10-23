@@ -1,0 +1,29 @@
+{
+  "projectId": "72300907",
+  "functions": {
+    "admin-create-order": {
+      "hasChanged": false,
+      "hash": "15694e376b54686e7ca9474034a4d68ead842c8682a7c56794f1ea16ecac0740"
+    },
+    "admin-manage": {
+      "hasChanged": false,
+      "hash": "2e930efd6dac0fd00a14327beaca205dc3a932a337960617ca0d17d310599805"
+    },
+    "admin-payments": {
+      "hasChanged": false,
+      "hash": "f784e5f6cf4f4aabbdd81d65d4a5f862a1bec0f8a35394a05df08c286af1ee13"
+    },
+    "create-order": {
+      "hasChanged": false,
+      "hash": "3c798abdb619b384b41d5e2a08715f2fa71ff5f5e38c29af0cad597e0fda7e59"
+    },
+    "order-status": {
+      "hasChanged": false,
+      "hash": "5e745ca7b5e5be7fe7946566b2f6a5bc36b3d8c09efc4f2390ba606f8a0cbfe8"
+    },
+    "brandspot-publish": {
+      "hasChanged": false,
+      "hash": "0ffe2a71e815e05dfc65fa01bbe42494b59fa98d97c35770b34ae8e942000126"
+    }
+  }
+}
