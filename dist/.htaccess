@@ -1,0 +1,45 @@
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Old WordPress / WooCommerce addresses
+  RewriteRule ^product/([^/]+)/?$ /izdelek/$1 [L,R=301]
+  RewriteRule ^izdelek/([^/]+)/$ /izdelek/$1 [L,R=301]
+  RewriteRule ^product-category/.*$ /trgovina [L,R=301]
+  RewriteRule ^shop/?$ /trgovina [L,R=301,NC]
+  RewriteRule ^trgovina/$ /trgovina [L,R=301]
+  RewriteRule ^(cart|kosarica)/?$ /trgovina [L,R=301]
+  RewriteRule ^(checkout|blagajna)/$ /blagajna [L,R=301]
+  RewriteRule ^(my-account|moj-racun)(/.*)?$ /prijava [L,R=301]
+  RewriteRule ^(contact|kontakt)/$ /kontakt [L,R=301]
+  RewriteRule ^(faq|pogosta-vprasanja)/$ /pogosta-vprasanja [L,R=301]
+  RewriteRule ^(privacy-policy|politika-zasebnosti)/?$ /pravno/zasebnost [L,R=301]
+  RewriteRule ^(terms-and-conditions|splosni-pogoji)/?$ /pravno/pogoji-poslovanja [L,R=301]
+  RewriteRule ^(wp-admin|wp-login\.php)(/.*)?$ /admin/prijava [L,R=301]
+  RewriteRule ^feed/?$ / [L,R=301]
+
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|webp|svg)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "index\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
