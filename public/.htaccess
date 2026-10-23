@@ -13,8 +13,7 @@ Options -MultiViews
   # Old WordPress / WooCommerce addresses
   RewriteRule ^product/([^/]+)/?$ /izdelek/$1 [L,R=301]
   RewriteRule ^izdelek/([^/]+)/$ /izdelek/$1 [L,R=301]
-  RewriteRule ^product-category/manuka-med(/.*)?$ /trgovina/manuka-med [L,R=301]
-  RewriteRule ^product-category/.*$ /trgovina/ostali-izdelki [L,R=301]
+  RewriteRule ^product-category/.*$ /trgovina [L,R=301]
   RewriteRule ^shop/?$ /trgovina [L,R=301,NC]
   RewriteRule ^trgovina/$ /trgovina [L,R=301]
   RewriteRule ^(cart|kosarica)/?$ /trgovina [L,R=301]
