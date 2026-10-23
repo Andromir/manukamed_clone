@@ -1,8 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { contentDefaults, type ContentDefaults, type ContentKey } from '@/content/defaults';
+import { exampleProductRows } from '@/data/exampleProducts';
 import { mapProduct, type Product, type ProductRow } from '@/data/products';
 import { defaultSettings, normalizeSettings, type StoreSettings } from '@/data/settings';
-import { supabase } from '@/lib/supabase';
+import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 
 interface StoreContextValue {
   products: Product[];
@@ -25,6 +26,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   const reload = useCallback(async () => {
+    if (!isSupabaseConfigured) {
+      setProducts(exampleProductRows.map(mapProduct));
+      setLoading(false);
+      return;
+    }
     const [p, s, c] = await Promise.all([
       supabase.from('products').select('*').eq('is_published', true).order('sort_order').order('name'),
       supabase.from('store_settings').select('*').maybeSingle(),
