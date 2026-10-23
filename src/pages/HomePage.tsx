@@ -18,7 +18,8 @@ export default function HomePage() {
   return (
     <>
       <section className="relative overflow-hidden bg-ink-950 text-white">
-        <div className="pointer-events-none absolute -right-40 top-1/2 h-[720px] w-[720px] -translate-y-1/2 rounded-full bg-brand-600/20 blur-3xl" />
+        <img src="/brand/hero-collage.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-black/90" />
         <div className="container-x relative grid min-h-[88vh] items-center gap-12 pb-20 pt-[132px] lg:grid-cols-2">
           <div>
             <p className="animate-fade-up text-xs font-semibold uppercase tracking-[0.2em] text-brand-400" style={{ animationDelay: '0.1s' }}>
