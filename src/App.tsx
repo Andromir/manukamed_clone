@@ -11,12 +11,10 @@ import CheckoutPage from '@/pages/CheckoutPage';
 import ContactPage from '@/pages/ContactPage';
 import FaqPage from '@/pages/FaqPage';
 import HomePage from '@/pages/HomePage';
-import LearnPage from '@/pages/LearnPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import PolicyPage from '@/pages/PolicyPage';
 import ProductPage from '@/pages/ProductPage';
 import ShopPage from '@/pages/ShopPage';
-import StoryPage from '@/pages/StoryPage';
 import ThankYouPage from '@/pages/ThankYouPage';
 
 const AdminLayout = lazy(() => import('@/components/admin/AdminLayout'));
@@ -68,8 +66,6 @@ export default function App() {
               <Route path="trgovina" element={<ShopPage />} />
               <Route path="trgovina/:category" element={<ShopPage />} />
               <Route path="izdelek/:slug" element={<ProductPage />} />
-              <Route path="spoznajte" element={<LearnPage />} />
-              <Route path="spoznajte/:slug" element={<StoryPage />} />
               <Route path="pogosta-vprasanja" element={<FaqPage />} />
               <Route path="kontakt" element={<ContactPage />} />
               <Route path="pravno/:slug" element={<PolicyPage />} />

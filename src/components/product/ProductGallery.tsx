@@ -13,17 +13,17 @@ export default function ProductGallery({ product }: { product: Product }) {
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Slika ${i + 1}`}
-            className={`aspect-square w-20 shrink-0 overflow-hidden border-2 transition-all ${
-              active === i ? 'border-navy-900' : 'border-transparent opacity-60 hover:opacity-100'
+            className={`aspect-square w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-mist-100 transition-all ${
+              active === i ? 'border-ink-950' : 'border-transparent opacity-60 hover:opacity-100'
             }`}
           >
             <img src={src} alt="" className="h-full w-full object-cover" />
           </button>
         ))}
       </div>
-      <div className="relative aspect-[4/5] flex-1 overflow-hidden bg-cream-100">
+      <div className="relative aspect-[4/5] flex-1 overflow-hidden rounded-3xl bg-mist-100">
         {product.badge && (
-          <span className="absolute left-5 top-5 z-10 rounded-full bg-gold-500 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white">
+          <span className="absolute left-5 top-5 z-10 rounded-full bg-brand-600 px-4 py-1.5 text-xs font-semibold text-white">
             {product.badge}
           </span>
         )}

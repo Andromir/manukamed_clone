@@ -51,7 +51,7 @@ export const defaultSettings: StoreSettings = {
   bank_details: { recipient: '', iban: '', bic: '', bank: '', purpose: 'Plačilo naročila' },
   countries: ['Slovenija'],
   ga_measurement_id: '',
-  store_email: 'info@manukamed.si',
+  store_email: 'info@brandspot.si',
 };
 
 export function normalizeSettings(row: Partial<StoreSettings> | null): StoreSettings {

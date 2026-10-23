@@ -17,7 +17,7 @@ export interface ResolvedLine extends CartLine {
   total: number;
 }
 
-const STORAGE_KEY = 'manukamed-cart';
+const STORAGE_KEY = 'brandspot-cart';
 
 interface CartContextValue {
   lines: ResolvedLine[];

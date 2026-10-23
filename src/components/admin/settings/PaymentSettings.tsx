@@ -69,10 +69,10 @@ function ProviderCredentials({
   };
 
   return (
-    <div className="mt-4 rounded-lg border border-navy-100 bg-navy-50/40 p-4">
+    <div className="mt-4 rounded-lg border border-ink-100 bg-ink-50/40 p-4">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <p className="flex items-center gap-2 text-sm font-medium text-navy-900">
-          <KeyRound className="h-4 w-4 text-gold-600" /> Podatki za povezavo
+        <p className="flex items-center gap-2 text-sm font-medium text-ink-900">
+          <KeyRound className="h-4 w-4 text-brand-600" /> Podatki za povezavo
         </p>
         {status.verified_at ? (
           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-200">
@@ -96,9 +96,9 @@ function ProviderCredentials({
           <input type="password" value={secret} onChange={(e) => setSecret(e.target.value)} autoComplete="new-password" className="admin-input font-mono text-xs" />
         </Field>
       </div>
-      <p className="mt-3 text-xs text-navy-800/60">
+      <p className="mt-3 text-xs text-ink-800/60">
         {help.help}{' '}
-        <a href={help.url} target="_blank" rel="noreferrer" className="underline hover:text-navy-900">
+        <a href={help.url} target="_blank" rel="noreferrer" className="underline hover:text-ink-900">
           Odpri
         </a>
       </p>
@@ -163,12 +163,12 @@ export default function PaymentSettings({ value, onChange, accessToken }: Props)
           <Card key={id}>
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-3">
-                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${m.enabled ? 'bg-navy-900 text-gold-300' : 'bg-navy-50 text-navy-400'}`}>
+                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${m.enabled ? 'bg-ink-900 text-brand-300' : 'bg-ink-50 text-ink-400'}`}>
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="font-medium text-navy-900">{m.label}</p>
-                  <p className="text-xs text-navy-800/60">
+                  <p className="font-medium text-ink-900">{m.label}</p>
+                  <p className="text-xs text-ink-800/60">
                     {m.enabled ? 'Na voljo kupcem na blagajni' : canEnable ? 'Izklopljeno' : 'Za vklop najprej vnesite in preverite podatke za povezavo'}
                   </p>
                 </div>
@@ -199,15 +199,15 @@ export default function PaymentSettings({ value, onChange, accessToken }: Props)
                 />
               ) : (
                 !statusError && (
-                  <div className="mt-4 flex justify-center py-4 text-navy-300">
+                  <div className="mt-4 flex justify-center py-4 text-ink-300">
                     <Spinner />
                   </div>
                 )
               ))}
 
             {id === 'bank' && (
-              <div className="mt-4 rounded-lg border border-navy-100 bg-navy-50/40 p-4">
-                <p className="mb-4 text-sm font-medium text-navy-900">Podatki za nakazilo (prikazani kupcu po naročilu)</p>
+              <div className="mt-4 rounded-lg border border-ink-100 bg-ink-50/40 p-4">
+                <p className="mb-4 text-sm font-medium text-ink-900">Podatki za nakazilo (prikazani kupcu po naročilu)</p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Prejemnik">
                     <input value={bank.recipient} onChange={(e) => setBank({ recipient: e.target.value })} className="admin-input" />

@@ -6,8 +6,8 @@ export function PageHeader({ title, description, actions }: { title: string; des
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight text-navy-900">{title}</h1>
-        {description && <p className="mt-1 text-sm text-navy-800/60">{description}</p>}
+        <h1 className="text-2xl font-medium tracking-tight text-ink-900">{title}</h1>
+        {description && <p className="mt-1 text-sm text-ink-800/60">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
     </div>
@@ -20,8 +20,8 @@ export function Card({ title, description, children, actions }: { title?: string
       {(title || actions) && (
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
-            {title && <h2 className="text-base font-medium text-navy-900">{title}</h2>}
-            {description && <p className="mt-1 text-sm text-navy-800/60">{description}</p>}
+            {title && <h2 className="text-base font-medium text-ink-900">{title}</h2>}
+            {description && <p className="mt-1 text-sm text-ink-800/60">{description}</p>}
           </div>
           {actions}
         </div>
@@ -36,7 +36,7 @@ export function Field({ label, hint, children, className = '' }: { label: string
     <label className={`block ${className}`}>
       <span className="admin-label">{label}</span>
       {children}
-      {hint && <span className="mt-1 block text-xs text-navy-800/50">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-ink-800/50">{hint}</span>}
     </label>
   );
 }
@@ -51,7 +51,7 @@ export function Toggle({ checked, onChange, disabled, label }: { checked: boolea
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40 ${
-        checked ? 'bg-emerald-600' : 'bg-navy-200'
+        checked ? 'bg-emerald-600' : 'bg-ink-200'
       }`}
     >
       <span className={`inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${checked ? 'translate-x-[22px]' : 'translate-x-0.5'}`} />
@@ -63,7 +63,7 @@ export function Notice({ tone, children }: { tone: 'success' | 'error' | 'info';
   const styles = {
     success: 'border-emerald-200 bg-emerald-50 text-emerald-800',
     error: 'border-red-200 bg-red-50 text-red-700',
-    info: 'border-navy-100 bg-navy-50 text-navy-800',
+    info: 'border-ink-100 bg-ink-50 text-ink-800',
   }[tone];
   const Icon = tone === 'success' ? CheckCircle2 : AlertCircle;
   return (
@@ -80,7 +80,7 @@ export function Spinner({ className = 'h-4 w-4' }: { className?: string }) {
 
 export function LoadingBlock() {
   return (
-    <div className="flex items-center justify-center py-24 text-navy-400">
+    <div className="flex items-center justify-center py-24 text-ink-400">
       <Spinner className="h-6 w-6" />
     </div>
   );
@@ -89,8 +89,8 @@ export function LoadingBlock() {
 export function SaveBar({ dirty, saving, onSave, onReset, message }: { dirty: boolean; saving: boolean; onSave: () => void; onReset?: () => void; message?: ReactNode }) {
   if (!dirty && !message) return null;
   return (
-    <div className="sticky bottom-4 z-20 mt-8 flex animate-fade-up items-center justify-between gap-4 rounded-xl border border-navy-100 bg-white/95 px-5 py-3 shadow-lg backdrop-blur">
-      <div className="text-sm text-navy-800">{message ?? 'Imate neshranjene spremembe.'}</div>
+    <div className="sticky bottom-4 z-20 mt-8 flex animate-fade-up items-center justify-between gap-4 rounded-xl border border-ink-100 bg-white/95 px-5 py-3 shadow-lg backdrop-blur">
+      <div className="text-sm text-ink-800">{message ?? 'Imate neshranjene spremembe.'}</div>
       {dirty && (
         <div className="flex gap-2">
           {onReset && (
@@ -128,16 +128,16 @@ export function ImageInput({ value, onChange, folder, onRemove, compact }: { val
 
   return (
     <div>
-      <div className={`group relative overflow-hidden rounded-lg border border-navy-100 bg-navy-50 ${compact ? 'aspect-square' : 'aspect-[16/10]'}`}>
+      <div className={`group relative overflow-hidden rounded-lg border border-ink-100 bg-ink-50 ${compact ? 'aspect-square' : 'aspect-[16/10]'}`}>
         {value ? (
           <img src={value} alt="" className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full items-center justify-center text-navy-300">
+          <div className="flex h-full items-center justify-center text-ink-300">
             <ImagePlus className="h-8 w-8" strokeWidth={1.25} />
           </div>
         )}
-        <div className="absolute inset-0 flex items-center justify-center gap-2 bg-navy-950/55 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-          <button type="button" onClick={() => ref.current?.click()} disabled={busy} className="rounded-md bg-white px-3 py-1.5 text-xs font-medium text-navy-900 hover:bg-gold-50">
+        <div className="absolute inset-0 flex items-center justify-center gap-2 bg-ink-950/55 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+          <button type="button" onClick={() => ref.current?.click()} disabled={busy} className="rounded-md bg-white px-3 py-1.5 text-xs font-medium text-ink-900 hover:bg-brand-50">
             {value ? 'Zamenjaj' : 'Naloži'}
           </button>
           {onRemove && (
@@ -148,7 +148,7 @@ export function ImageInput({ value, onChange, folder, onRemove, compact }: { val
         </div>
         {busy && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-            <Spinner className="h-6 w-6 text-navy-700" />
+            <Spinner className="h-6 w-6 text-ink-700" />
           </div>
         )}
       </div>

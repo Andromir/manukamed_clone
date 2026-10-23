@@ -2,9 +2,9 @@ import { ArrowRight, Lock, ShieldCheck } from 'lucide-react';
 import { useEffect, useState, type FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { LoadingBlock, Notice, Spinner } from '@/components/admin/ui';
+import BrandBall from '@/components/ui/BrandBall';
 import Logo from '@/components/ui/Logo';
 import { useAdminAuth } from '@/context/AdminAuthContext';
-import { images } from '@/data/images';
 import { supabase } from '@/lib/supabase';
 
 export default function AdminLoginPage() {
@@ -42,31 +42,30 @@ export default function AdminLoginPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="relative hidden overflow-hidden bg-navy-950 lg:block">
-        <img src={images.honeySpoonsDark} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-navy-950/30" />
+      <div className="relative hidden overflow-hidden bg-ink-950 lg:block">
+        <BrandBall className="absolute -right-32 top-1/3 h-[32rem] w-[32rem] opacity-90" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <Logo light />
           <div className="max-w-md">
-            <p className="text-xs uppercase tracking-[0.25em] text-gold-300">Skrbniška plošča</p>
-            <h1 className="mt-4 font-serif text-4xl italic leading-tight text-white">Upravljajte svojo trgovino na enem mestu.</h1>
-            <p className="mt-4 text-sm leading-relaxed text-navy-100/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Skrbniška plošča</p>
+            <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-white">Upravljajte svojo trgovino na enem mestu.</h1>
+            <p className="mt-4 text-sm leading-relaxed text-ink-100/70">
               Izdelki, naročila, plačila, vsebina strani in analitika prodaje.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-center bg-cream-50 px-6 py-16">
+      <div className="flex items-center justify-center bg-mist-100 px-6 py-16">
         <div className="w-full max-w-sm animate-fade-up">
           <div className="mb-10 lg:hidden">
             <Logo />
           </div>
-          <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-navy-900 text-gold-300">
+          <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-ink-950 text-brand-400">
             {setup ? <ShieldCheck className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
           </div>
-          <h2 className="text-2xl font-medium tracking-tight text-navy-900">{setup ? 'Ustvarite skrbniški račun' : 'Prijava za skrbnike'}</h2>
-          <p className="mt-2 text-sm text-navy-800/60">
+          <h2 className="text-2xl font-medium tracking-tight text-ink-900">{setup ? 'Ustvarite skrbniški račun' : 'Prijava za skrbnike'}</h2>
+          <p className="mt-2 text-sm text-ink-800/60">
             {setup
               ? 'Trgovina še nima skrbnika. Prvi ustvarjeni račun dobi polne pravice.'
               : 'Vnesite podatke svojega skrbniškega računa.'}

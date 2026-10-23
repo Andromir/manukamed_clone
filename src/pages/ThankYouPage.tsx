@@ -31,20 +31,20 @@ function BankTransferBox({ order }: { order: OrderStatus }) {
   ].filter((r): r is [string, string] => Boolean(r[1]));
 
   return (
-    <div className="mx-auto mt-12 max-w-xl border border-gold-300 bg-cream-50 p-8">
+    <div className="mx-auto mt-12 max-w-xl border border-brand-300 bg-mist-50 p-8">
       <div className="flex items-center gap-3">
-        <Landmark className="h-5 w-5 text-gold-700" strokeWidth={1.5} />
-        <h2 className="text-sm font-medium uppercase tracking-[0.16em] text-navy-900">Podatki za plačilo (UPN)</h2>
+        <Landmark className="h-5 w-5 text-brand-700" strokeWidth={1.5} />
+        <h2 className="text-sm font-medium uppercase tracking-[0.16em] text-ink-900">Podatki za plačilo (UPN)</h2>
       </div>
-      <dl className="mt-6 divide-y divide-navy-100 text-sm">
+      <dl className="mt-6 divide-y divide-ink-100 text-sm">
         {rows.map(([label, value]) => (
           <div key={label} className="flex justify-between gap-6 py-2.5">
-            <dt className="text-navy-800/60">{label}</dt>
-            <dd className="select-all text-right font-medium text-navy-900">{value}</dd>
+            <dt className="text-ink-800/60">{label}</dt>
+            <dd className="select-all text-right font-medium text-ink-900">{value}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-4 text-xs leading-relaxed text-navy-800/60">Naročilo odpošljemo, ko prejmemo plačilo. Pri plačilu obvezno navedite sklic.</p>
+      <p className="mt-4 text-xs leading-relaxed text-ink-800/60">Naročilo odpošljemo, ko prejmemo plačilo. Pri plačilu obvezno navedite sklic.</p>
     </div>
   );
 }
@@ -87,7 +87,7 @@ export default function ThankYouPage() {
       <section className="container-x py-24 text-center">
         <AlertCircle className="mx-auto h-12 w-12 text-red-600" strokeWidth={1.25} />
         <h1 className="heading-md mt-6">Naročila ni bilo mogoče prikazati</h1>
-        <p className="mt-3 text-sm text-navy-800/70">{error}</p>
+        <p className="mt-3 text-sm text-ink-800/70">{error}</p>
         <Link to="/kontakt" className="btn-outline mt-8">
           Kontaktirajte nas
         </Link>
@@ -100,10 +100,10 @@ export default function ThankYouPage() {
   if (awaitingPayment) {
     return (
       <section className="container-x py-24 text-center">
-        <Clock className="mx-auto h-12 w-12 text-gold-600" strokeWidth={1.25} />
+        <Clock className="mx-auto h-12 w-12 text-brand-600" strokeWidth={1.25} />
         <p className="eyebrow mt-8">Naročilo {order.order_number}</p>
         <h1 className="heading-md mt-4">Plačilo ni bilo zaključeno</h1>
-        <p className="mx-auto mt-3 max-w-md text-sm text-navy-800/70">
+        <p className="mx-auto mt-3 max-w-md text-sm text-ink-800/70">
           Plačila nismo prejeli. Izdelki so še vedno v vaši košarici – poskusite znova ali izberite drug način plačila.
         </p>
         <Link to="/blagajna" className="btn-primary mt-8">
@@ -126,18 +126,18 @@ export default function ThankYouPage() {
         <CheckCircle2 className="mx-auto h-16 w-16 animate-scale-in text-emerald-600" strokeWidth={1.25} />
         <p className="eyebrow mt-8">Naročilo {order.order_number}</p>
         <h1 className="heading-lg mt-4">Hvala za vaše naročilo!</h1>
-        <p className="mt-4 text-sm leading-relaxed text-navy-800/70">
-          Vaše naročilo v vrednosti <strong className="font-medium text-navy-900">{formatPrice(order.total)}</strong> smo prejeli
+        <p className="mt-4 text-sm leading-relaxed text-ink-800/70">
+          Vaše naročilo v vrednosti <strong className="font-medium text-ink-900">{formatPrice(order.total)}</strong> smo prejeli
           {order.payment_status === 'paid' ? ' in plačilo je potrjeno.' : '.'}
         </p>
       </div>
       {isBank && <BankTransferBox order={order} />}
       <div className="mx-auto mt-16 grid max-w-4xl gap-6 sm:grid-cols-3">
         {steps.map(({ Icon, title, text }) => (
-          <div key={title} className="border border-navy-100 p-8 text-center">
-            <Icon className="mx-auto h-7 w-7 text-gold-600" strokeWidth={1.25} />
-            <p className="mt-4 text-sm font-medium uppercase tracking-[0.14em] text-navy-900">{title}</p>
-            <p className="mt-2 text-sm text-navy-800/70">{text}</p>
+          <div key={title} className="border border-ink-100 p-8 text-center">
+            <Icon className="mx-auto h-7 w-7 text-brand-600" strokeWidth={1.25} />
+            <p className="mt-4 text-sm font-medium uppercase tracking-[0.14em] text-ink-900">{title}</p>
+            <p className="mt-2 text-sm text-ink-800/70">{text}</p>
           </div>
         ))}
       </div>
