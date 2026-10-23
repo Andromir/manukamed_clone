@@ -3,28 +3,26 @@ import { useEffect, useState, type ChangeEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Card, Field, ImageInput, LoadingBlock, Notice, PageHeader, Spinner, Toggle } from '@/components/admin/ui';
 import { useStore } from '@/context/StoreContext';
-import { categories, type ProductRow } from '@/data/products';
+import { categories, productDetailLabels, type ProductRow } from '@/data/products';
 import { supabase } from '@/lib/supabase';
 
-type Draft = Omit<ProductRow, 'id' | 'images' | 'variants' | 'nutrition' | 'sale_price' | 'rating' | 'mgo'> & {
+type Draft = Omit<ProductRow, 'id' | 'images' | 'variants' | 'nutrition' | 'sale_price' | 'rating'> & {
   images: string[];
   variants: { size: string; price: string }[];
   nutrition: { label: string; value: string }[];
   sale_price: string;
   rating: string;
-  mgo: string;
 };
 
 const emptyDraft: Draft = {
   slug: '',
   name: '',
-  category: 'manuka-med',
-  mgo: '',
+  category: 'telefoni',
   badge: '',
   short: '',
   description: '',
   images: [],
-  variants: [{ size: '250 g', price: '' }],
+  variants: [{ size: '', price: '' }],
   sale_price: '',
   stock: 0,
   rating: '5',
@@ -59,7 +57,6 @@ function toDraft(r: ProductRow): Draft {
     ingredients: r.ingredients ?? '',
     allergy: r.allergy ?? '',
     badge: r.badge ?? '',
-    mgo: r.mgo === null ? '' : String(r.mgo),
     images: Array.isArray(r.images) ? r.images : [],
     variants: (Array.isArray(r.variants) && r.variants.length ? r.variants : [{ size: '', price: 0 }]).map((v) => ({ size: v.size, price: String(v.price) })),
     nutrition: Array.isArray(r.nutrition) ? r.nutrition : [],
@@ -71,10 +68,10 @@ function toDraft(r: ProductRow): Draft {
 function validate(d: Draft): string | null {
   if (!d.name.trim()) return 'Vnesite ime izdelka.';
   if (!/^[a-z0-9-]+$/.test(d.slug)) return 'Spletni naslov lahko vsebuje le male črke, številke in vezaje.';
-  if (d.variants.length === 0) return 'Dodajte vsaj eno velikost s ceno.';
+  if (d.variants.length === 0) return 'Dodajte vsaj eno različico s ceno.';
   for (const v of d.variants) {
-    if (!v.size.trim()) return 'Vsaka velikost potrebuje oznako (npr. 250 g).';
-    if (!(Number(v.price) > 0)) return 'Vsaka velikost potrebuje veljavno ceno.';
+    if (!v.size.trim()) return 'Vsaka različica potrebuje oznako (npr. 256 GB ali Črna).';
+    if (!(Number(v.price) > 0)) return 'Vsaka različica potrebuje veljavno ceno.';
   }
   if (d.sale_price && !(Number(d.sale_price) > 0)) return 'Akcijska cena ni veljavna.';
   if (d.stock < 0) return 'Zaloga ne more biti negativna.';
@@ -128,7 +125,6 @@ export default function AdminProductEditPage() {
       ...draft,
       name: draft.name.trim(),
       badge: draft.badge?.trim() || null,
-      mgo: draft.mgo === '' ? null : Number(draft.mgo),
       sale_price: draft.sale_price === '' ? null : Number(draft.sale_price),
       rating: Number(draft.rating) || 5,
       variants: draft.variants.map((v) => ({ size: v.size.trim(), price: Number(v.price) })),
@@ -165,7 +161,7 @@ export default function AdminProductEditPage() {
 
   return (
     <div className="animate-fade-in pb-24">
-      <Link to="/admin/izdelki" className="mb-4 inline-flex items-center gap-1 text-sm text-navy-700 hover:text-navy-900">
+      <Link to="/admin/izdelki" className="mb-4 inline-flex items-center gap-1 text-sm text-ink-700 hover:text-ink-900">
         <ArrowLeft className="h-4 w-4" /> Vsi izdelki
       </Link>
       <PageHeader
@@ -186,7 +182,7 @@ export default function AdminProductEditPage() {
               <Field label="Ime izdelka" className="sm:col-span-2">
                 <input value={draft.name} onChange={text('name')} className="admin-input" />
               </Field>
-              <Field label="Spletni naslov" hint={`manukamed.si/izdelek/${draft.slug || '...'}`} className="sm:col-span-2">
+              <Field label="Spletni naslov" hint={`brandspot.si/izdelek/${draft.slug || '...'}`} className="sm:col-span-2">
                 <input
                   value={draft.slug}
                   onChange={(e) => {
@@ -216,9 +212,9 @@ export default function AdminProductEditPage() {
                     onChange={(url) => set('images', draft.images.map((x, j) => (j === i ? url : x)))}
                     onRemove={() => set('images', draft.images.filter((_, j) => j !== i))}
                   />
-                  {i === 0 && <span className="absolute left-2 top-2 rounded bg-navy-900 px-1.5 py-0.5 text-[10px] font-medium text-white">Glavna</span>}
+                  {i === 0 && <span className="absolute left-2 top-2 rounded bg-ink-900 px-1.5 py-0.5 text-[10px] font-medium text-white">Glavna</span>}
                   {i > 0 && (
-                    <button type="button" onClick={() => moveImage(i)} aria-label="Premakni naprej" className="absolute left-2 top-2 rounded bg-white/90 p-1 text-navy-800 shadow hover:bg-white">
+                    <button type="button" onClick={() => moveImage(i)} aria-label="Premakni naprej" className="absolute left-2 top-2 rounded bg-white/90 p-1 text-ink-800 shadow hover:bg-white">
                       <ArrowUp className="h-3 w-3 -rotate-90" />
                     </button>
                   )}
@@ -228,15 +224,15 @@ export default function AdminProductEditPage() {
             </div>
           </Card>
 
-          <Card title="Cene in velikosti">
+          <Card title="Cene in različice">
             <div className="space-y-3">
               {draft.variants.map((v, i) => (
                 <div key={i} className="flex items-end gap-3">
-                  <Field label={i === 0 ? 'Velikost' : ''} className="flex-1">
+                  <Field label={i === 0 ? 'Različica' : ''} className="flex-1">
                     <input
                       value={v.size}
                       onChange={(e) => set('variants', draft.variants.map((x, j) => (j === i ? { ...x, size: e.target.value } : x)))}
-                      placeholder="npr. 250 g"
+                      placeholder="npr. 256 GB"
                       className="admin-input"
                     />
                   </Field>
@@ -254,18 +250,18 @@ export default function AdminProductEditPage() {
                     type="button"
                     disabled={draft.variants.length === 1}
                     onClick={() => set('variants', draft.variants.filter((_, j) => j !== i))}
-                    aria-label="Odstrani velikost"
-                    className="mb-0.5 rounded-lg p-2.5 text-navy-300 hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
+                    aria-label="Odstrani različico"
+                    className="mb-0.5 rounded-lg p-2.5 text-ink-300 hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
                   >
                     <X className="h-4 w-4" />
                   </button>
                 </div>
               ))}
               <button type="button" onClick={() => set('variants', [...draft.variants, { size: '', price: '' }])} className="admin-btn-secondary">
-                <Plus className="h-4 w-4" /> Dodaj velikost
+                <Plus className="h-4 w-4" /> Dodaj različico
               </button>
             </div>
-            <div className="mt-6 grid gap-4 border-t border-navy-50 pt-6 sm:grid-cols-2">
+            <div className="mt-6 grid gap-4 border-t border-ink-50 pt-6 sm:grid-cols-2">
               <Field label="Akcijska cena (EUR)" hint="Pustite prazno, če izdelek ni v akciji.">
                 <input type="number" step="0.01" min="0" value={draft.sale_price} onChange={text('sale_price')} className="admin-input" />
               </Field>
@@ -277,37 +273,37 @@ export default function AdminProductEditPage() {
 
           <Card title="Podrobnosti" description="Prikazano v zavihkih na strani izdelka. Prazna polja se ne prikažejo.">
             <div className="grid gap-4">
-              <Field label="Uporaba">
+              <Field label={productDetailLabels.howToUse}>
                 <textarea rows={3} value={draft.how_to_use} onChange={text('how_to_use')} className="admin-input" />
               </Field>
-              <Field label="Okus">
+              <Field label={productDetailLabels.taste}>
                 <textarea rows={2} value={draft.taste} onChange={text('taste')} className="admin-input" />
               </Field>
-              <Field label="Sestavine">
+              <Field label={productDetailLabels.ingredients}>
                 <textarea rows={2} value={draft.ingredients} onChange={text('ingredients')} className="admin-input" />
               </Field>
-              <Field label="Alergeni in opozorila">
+              <Field label={productDetailLabels.allergy}>
                 <textarea rows={2} value={draft.allergy} onChange={text('allergy')} className="admin-input" />
               </Field>
             </div>
-            <div className="mt-6 border-t border-navy-50 pt-6">
-              <p className="admin-label">Hranilne vrednosti</p>
+            <div className="mt-6 border-t border-ink-50 pt-6">
+              <p className="admin-label">{productDetailLabels.nutrition}</p>
               <div className="space-y-2">
                 {draft.nutrition.map((n, i) => (
                   <div key={i} className="flex gap-2">
                     <input
                       value={n.label}
-                      placeholder="npr. Energija"
+                      placeholder="npr. Zaslon"
                       onChange={(e) => set('nutrition', draft.nutrition.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)))}
                       className="admin-input flex-1"
                     />
                     <input
                       value={n.value}
-                      placeholder="npr. 1380 kJ"
+                      placeholder="npr. 6,1″ OLED"
                       onChange={(e) => set('nutrition', draft.nutrition.map((x, j) => (j === i ? { ...x, value: e.target.value } : x)))}
                       className="admin-input w-40"
                     />
-                    <button type="button" onClick={() => set('nutrition', draft.nutrition.filter((_, j) => j !== i))} aria-label="Odstrani vrstico" className="rounded-lg p-2.5 text-navy-300 hover:bg-red-50 hover:text-red-600">
+                    <button type="button" onClick={() => set('nutrition', draft.nutrition.filter((_, j) => j !== i))} aria-label="Odstrani vrstico" className="rounded-lg p-2.5 text-ink-300 hover:bg-red-50 hover:text-red-600">
                       <X className="h-4 w-4" />
                     </button>
                   </div>
@@ -325,15 +321,15 @@ export default function AdminProductEditPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-navy-900">Objavljeno</p>
-                  <p className="text-xs text-navy-800/50">Vidno kupcem v trgovini.</p>
+                  <p className="text-sm font-medium text-ink-900">Objavljeno</p>
+                  <p className="text-xs text-ink-800/50">Vidno kupcem v trgovini.</p>
                 </div>
                 <Toggle checked={draft.is_published} onChange={(v) => set('is_published', v)} label="Objavljeno" />
               </div>
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-navy-900">Najbolje prodajano</p>
-                  <p className="text-xs text-navy-800/50">Prikazano na domači strani.</p>
+                  <p className="text-sm font-medium text-ink-900">Najbolje prodajano</p>
+                  <p className="text-xs text-ink-800/50">Prikazano na domači strani.</p>
                 </div>
                 <Toggle checked={draft.is_bestseller} onChange={(v) => set('is_bestseller', v)} label="Najbolje prodajano" />
               </div>
@@ -350,9 +346,6 @@ export default function AdminProductEditPage() {
                     </option>
                   ))}
                 </select>
-              </Field>
-              <Field label="MGO vrednost" hint="Samo za manuka med, npr. 400.">
-                <input type="number" min="0" value={draft.mgo} onChange={text('mgo')} className="admin-input" />
               </Field>
               <Field label="Značka" hint="Kratka oznaka na sliki, npr. Novo.">
                 <input value={draft.badge ?? ''} onChange={text('badge')} className="admin-input" />
@@ -378,7 +371,7 @@ export default function AdminProductEditPage() {
             <Card title="Brisanje">
               {confirmDelete ? (
                 <div className="space-y-3">
-                  <p className="text-sm text-navy-800">Izdelek bo trajno izbrisan. Pretekla naročila ostanejo nespremenjena.</p>
+                  <p className="text-sm text-ink-800">Izdelek bo trajno izbrisan. Pretekla naročila ostanejo nespremenjena.</p>
                   <div className="flex gap-2">
                     <button type="button" onClick={remove} disabled={saving} className="admin-btn-danger">
                       Da, izbriši
@@ -398,7 +391,7 @@ export default function AdminProductEditPage() {
         </div>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-navy-100 bg-white/95 backdrop-blur lg:left-64">
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-ink-100 bg-white/95 backdrop-blur lg:left-64">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-8 lg:px-10">
           <div className="min-w-0 text-sm">
             {error ? <span className="text-red-600">{error}</span> : saved ? <span className="text-emerald-700">Spremembe so shranjene.</span> : null}

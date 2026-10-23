@@ -102,19 +102,19 @@ export default function DiscountCodes() {
         {!codes ? (
           <LoadingBlock />
         ) : codes.length === 0 ? (
-          <p className="py-6 text-center text-sm text-navy-800/50">Ni kod za popust.</p>
+          <p className="py-6 text-center text-sm text-ink-800/50">Ni kod za popust.</p>
         ) : (
-          <ul className="divide-y divide-navy-50">
+          <ul className="divide-y divide-ink-50">
             {codes.map((c) => {
               const expired = c.expires_at !== null && new Date(c.expires_at) < new Date();
               const used = c.max_uses !== null && c.used_count >= c.max_uses;
               return (
                 <li key={c.code} className="flex flex-wrap items-center justify-between gap-4 py-3">
                   <div>
-                    <p className="font-mono text-sm font-medium text-navy-900">
-                      {c.code} <span className="ml-2 font-sans text-gold-700">-{Number(c.percent)} %</span>
+                    <p className="font-mono text-sm font-medium text-ink-900">
+                      {c.code} <span className="ml-2 font-sans text-brand-700">-{Number(c.percent)} %</span>
                     </p>
-                    <p className="text-xs text-navy-800/50">
+                    <p className="text-xs text-ink-800/50">
                       Uporabljeno {c.used_count}
                       {c.max_uses !== null && ` / ${c.max_uses}`}
                       {c.expires_at && ` · velja do ${formatDate(c.expires_at)}`}
@@ -124,7 +124,7 @@ export default function DiscountCodes() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Toggle checked={c.active} onChange={() => toggle(c)} label={`Aktivna koda ${c.code}`} />
-                    <button type="button" onClick={() => remove(c)} aria-label={`Izbriši ${c.code}`} className="rounded-lg p-2 text-navy-300 hover:bg-red-50 hover:text-red-600">
+                    <button type="button" onClick={() => remove(c)} aria-label={`Izbriši ${c.code}`} className="rounded-lg p-2 text-ink-300 hover:bg-red-50 hover:text-red-600">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>

@@ -45,7 +45,7 @@ function Section({ title, children, aside }: { title: string; children: ReactNod
   return (
     <section className="mt-10">
       <div className="mb-4 flex items-baseline justify-between">
-        <h2 className="text-xl font-normal text-navy-900">{title}</h2>
+        <h2 className="text-xl font-normal text-ink-900">{title}</h2>
         {aside}
       </div>
       {children}
@@ -105,10 +105,10 @@ export default function CheckoutPage() {
 
   if (cart.lines.length === 0) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cream-50 px-6 text-center">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-mist-50 px-6 text-center">
         <Logo />
         <h1 className="heading-lg mt-12">Vaša košarica je prazna</h1>
-        <p className="mt-4 text-sm text-navy-800/70">Za nadaljevanje na blagajno dodajte izdelke v košarico.</p>
+        <p className="mt-4 text-sm text-ink-800/70">Za nadaljevanje na blagajno dodajte izdelke v košarico.</p>
         <Link to="/trgovina" className="btn-primary mt-8">
           V trgovino
         </Link>
@@ -173,12 +173,12 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white lg:bg-[linear-gradient(to_right,#ffffff_50%,#f8f5ee_50%)]">
+    <div className="min-h-screen bg-white lg:bg-[linear-gradient(to_right,#ffffff_50%,#f3f3f4_50%)]">
       <div className="mx-auto grid max-w-6xl lg:grid-cols-2">
-        <div className="px-5 py-8 sm:px-10 lg:border-r lg:border-navy-100 lg:py-12 lg:pr-14">
+        <div className="px-5 py-8 sm:px-10 lg:border-r lg:border-ink-100 lg:py-12 lg:pr-14">
           <div className="flex items-center justify-between">
             <Logo />
-            <Link to="/trgovina" aria-label="Nazaj v trgovino" className="text-gold-600 hover:text-navy-900">
+            <Link to="/trgovina" aria-label="Nazaj v trgovino" className="text-brand-600 hover:text-ink-900">
               <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
             </Link>
           </div>
@@ -186,22 +186,22 @@ export default function CheckoutPage() {
           <button
             type="button"
             onClick={() => setSummaryOpen((v) => !v)}
-            className="mt-8 flex w-full items-center justify-between border-y border-navy-100 bg-cream-50 px-4 py-4 text-sm text-gold-700 lg:hidden"
+            className="mt-8 flex w-full items-center justify-between border-y border-ink-100 bg-mist-50 px-4 py-4 text-sm text-brand-700 lg:hidden"
           >
             <span className="flex items-center gap-2">
               {summaryOpen ? 'Skrij' : 'Prikaži'} povzetek naročila <ChevronDown className={`h-4 w-4 transition-transform ${summaryOpen ? 'rotate-180' : ''}`} />
             </span>
-            <span className="font-medium text-navy-900">{formatPrice(total)}</span>
+            <span className="font-medium text-ink-900">{formatPrice(total)}</span>
           </button>
           {summaryOpen && (
-            <div className="animate-fade-in bg-cream-50 px-4 py-6 lg:hidden">
+            <div className="animate-fade-in bg-mist-50 px-4 py-6 lg:hidden">
               <OrderSummary shipping={shippingPrice} paymentFee={paymentFee} paymentFeeLabel={payment ? `Strošek: ${payment.label}` : undefined} />
             </div>
           )}
 
           {cancelled && (
-            <div className="mt-8 flex items-start gap-3 border border-gold-300 bg-gold-50 p-4 text-sm text-navy-900">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-gold-700" />
+            <div className="mt-8 flex items-start gap-3 border border-brand-300 bg-brand-50 p-4 text-sm text-ink-900">
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
               Plačilo je bilo preklicano. Izdelki so še vedno v vaši košarici – izberete lahko drug način plačila.
             </div>
           )}
@@ -210,32 +210,32 @@ export default function CheckoutPage() {
             <Section
               title="Kontakt"
               aside={
-                <Link to="/prijava" className="text-sm text-gold-600 underline">
+                <Link to="/prijava" className="text-sm text-brand-600 underline">
                   {account ? 'Moj račun' : 'Prijava'}
                 </Link>
               }
             >
               {account ? (
-                <div className="animate-fade-in flex items-start gap-3 border border-navy-100 bg-cream-50 p-4">
-                  <UserCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" strokeWidth={1.5} />
+                <div className="animate-fade-in flex items-start gap-3 border border-ink-100 bg-mist-50 p-4">
+                  <UserCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" strokeWidth={1.5} />
                   <div className="min-w-0 text-sm">
-                    <p className="text-navy-800/70">Prijavljeni kot</p>
-                    <p className="truncate font-medium text-navy-900">{account.email}</p>
-                    <p className="mt-1 text-xs text-navy-800/60">Naročilo bo shranjeno v vaš račun.</p>
+                    <p className="text-ink-800/70">Prijavljeni kot</p>
+                    <p className="truncate font-medium text-ink-900">{account.email}</p>
+                    <p className="mt-1 text-xs text-ink-800/60">Naročilo bo shranjeno v vaš račun.</p>
                   </div>
                 </div>
               ) : (
                 <input name="email" type="email" required placeholder="E-poštni naslov" className="input" autoComplete="email" />
               )}
-              <label className="mt-3 flex items-center gap-2 text-sm text-navy-800">
-                <input name="newsletter" type="checkbox" className="h-4 w-4 accent-navy-900" /> Pošljite mi novice in posebne ponudbe
+              <label className="mt-3 flex items-center gap-2 text-sm text-ink-800">
+                <input name="newsletter" type="checkbox" className="h-4 w-4 accent-ink-900" /> Pošljite mi novice in posebne ponudbe
               </label>
             </Section>
 
             <Section title="Dostava">
               <div key={saved ? 'saved' : 'empty'} className="grid gap-3 sm:grid-cols-2">
                 <label className="relative sm:col-span-2">
-                  <span className="absolute left-4 top-2 text-[11px] text-navy-800/50">Država</span>
+                  <span className="absolute left-4 top-2 text-[11px] text-ink-800/50">Država</span>
                   <select
                     name="country"
                     className="input appearance-none pb-2 pt-6"
@@ -245,7 +245,7 @@ export default function CheckoutPage() {
                       <option key={c}>{c}</option>
                     ))}
                   </select>
-                  <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-700" />
+                  <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-700" />
                 </label>
                 <input name="first_name" required placeholder="Ime" className="input" autoComplete="given-name" defaultValue={saved?.first_name ?? ''} />
                 <input name="last_name" required placeholder="Priimek" className="input" autoComplete="family-name" defaultValue={saved?.last_name ?? ''} />
@@ -255,23 +255,23 @@ export default function CheckoutPage() {
                 <input name="city" required placeholder="Kraj" className="input" autoComplete="address-level2" defaultValue={saved?.city ?? ''} />
                 <div className="relative sm:col-span-2">
                   <input name="phone" required type="tel" placeholder="Telefon" className="input pr-10" autoComplete="tel" defaultValue={saved?.phone ?? ''} />
-                  <HelpCircle className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-300" aria-label="Za obveščanje o dostavi" />
+                  <HelpCircle className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" aria-label="Za obveščanje o dostavi" />
                 </div>
               </div>
               {account && (
-                <label className="mt-3 flex items-center gap-2 text-sm text-navy-800">
-                  <input type="checkbox" checked={saveAddress} onChange={(e) => setSaveAddress(e.target.checked)} className="h-4 w-4 accent-navy-900" />
+                <label className="mt-3 flex items-center gap-2 text-sm text-ink-800">
+                  <input type="checkbox" checked={saveAddress} onChange={(e) => setSaveAddress(e.target.checked)} className="h-4 w-4 accent-ink-900" />
                   Shrani te podatke v moj profil za naslednji nakup
                 </label>
               )}
             </Section>
 
             <Section title="Način dostave">
-              <div className="divide-y divide-navy-100 border border-navy-100">
+              <div className="divide-y divide-ink-100 border border-ink-100">
                 {shippingMethods.map((m) => (
                   <label
                     key={m.id}
-                    className={`flex cursor-pointer items-center gap-4 px-4 py-4 transition-colors ${shippingId === m.id ? 'bg-navy-50' : 'hover:bg-cream-50'}`}
+                    className={`flex cursor-pointer items-center gap-4 px-4 py-4 transition-colors ${shippingId === m.id ? 'bg-ink-50' : 'hover:bg-mist-50'}`}
                   >
                     <input
                       type="radio"
@@ -281,38 +281,38 @@ export default function CheckoutPage() {
                         setShippingId(m.id);
                         setError('');
                       }}
-                      className="h-4 w-4 accent-navy-900"
+                      className="h-4 w-4 accent-ink-900"
                     />
                     <span className="flex-1">
-                      <span className="block text-sm text-navy-900">{m.label}</span>
-                      <span className="text-xs text-navy-800/60">{m.eta}</span>
+                      <span className="block text-sm text-ink-900">{m.label}</span>
+                      <span className="text-xs text-ink-800/60">{m.eta}</span>
                     </span>
-                    <span className="text-sm font-normal text-navy-900">{m.price === 0 || freeShipping ? 'Brezplačno' : formatPrice(m.price)}</span>
+                    <span className="text-sm font-normal text-ink-900">{m.price === 0 || freeShipping ? 'Brezplačno' : formatPrice(m.price)}</span>
                   </label>
                 ))}
               </div>
             </Section>
 
             <Section title="Plačilo">
-              <p className="-mt-2 mb-4 text-sm text-navy-800/60">Vse transakcije so varne in šifrirane.</p>
-              <div className="divide-y divide-navy-100 border border-navy-100">
+              <p className="-mt-2 mb-4 text-sm text-ink-800/60">Vse transakcije so varne in šifrirane.</p>
+              <div className="divide-y divide-ink-100 border border-ink-100">
                 {paymentMethods.length === 0 && (
-                  <p className="p-4 text-sm text-navy-800/70">{loading ? 'Nalaganje načinov plačila …' : 'Trenutno ni na voljo nobenega načina plačila.'}</p>
+                  <p className="p-4 text-sm text-ink-800/70">{loading ? 'Nalaganje načinov plačila …' : 'Trenutno ni na voljo nobenega načina plačila.'}</p>
                 )}
                 {paymentMethods.map(({ id, label, fee, description }) => {
                   const Icon = paymentIcons[id];
                   return (
                     <div key={id}>
-                      <label className={`flex cursor-pointer items-center gap-4 px-4 py-4 transition-colors ${paymentId === id ? 'bg-navy-50' : 'hover:bg-cream-50'}`}>
-                        <input type="radio" name="payment" checked={paymentId === id} onChange={() => setPaymentId(id)} className="h-4 w-4 accent-navy-900" />
-                        <span className="flex-1 text-sm text-navy-900">
+                      <label className={`flex cursor-pointer items-center gap-4 px-4 py-4 transition-colors ${paymentId === id ? 'bg-ink-50' : 'hover:bg-mist-50'}`}>
+                        <input type="radio" name="payment" checked={paymentId === id} onChange={() => setPaymentId(id)} className="h-4 w-4 accent-ink-900" />
+                        <span className="flex-1 text-sm text-ink-900">
                           {label}
-                          {fee > 0 && <span className="text-navy-800/60"> (+{formatPrice(fee)})</span>}
+                          {fee > 0 && <span className="text-ink-800/60"> (+{formatPrice(fee)})</span>}
                         </span>
-                        <Icon className="h-5 w-5 text-navy-400" strokeWidth={1.5} />
+                        <Icon className="h-5 w-5 text-ink-400" strokeWidth={1.5} />
                       </label>
                       {paymentId === id && (
-                        <p className="animate-fade-in bg-cream-50 p-4 text-sm text-navy-800/70">{description || paymentHints[id]}</p>
+                        <p className="animate-fade-in bg-mist-50 p-4 text-sm text-ink-800/70">{description || paymentHints[id]}</p>
                       )}
                     </div>
                   );
@@ -320,15 +320,15 @@ export default function CheckoutPage() {
               </div>
             </Section>
 
-            <label className="mt-8 flex items-start gap-3 text-sm text-navy-800">
-              <input type="checkbox" required className="mt-0.5 h-4 w-4 accent-navy-900" />
+            <label className="mt-8 flex items-start gap-3 text-sm text-ink-800">
+              <input type="checkbox" required className="mt-0.5 h-4 w-4 accent-ink-900" />
               <span>
                 Strinjam se s{' '}
-                <Link to="/pravno/pogoji-poslovanja" className="text-gold-700 underline">
+                <Link to="/pravno/pogoji-poslovanja" className="text-brand-700 underline">
                   splošnimi pogoji poslovanja
                 </Link>{' '}
                 in{' '}
-                <Link to="/pravno/zasebnost" className="text-gold-700 underline">
+                <Link to="/pravno/zasebnost" className="text-brand-700 underline">
                   politiko zasebnosti
                 </Link>
                 .
@@ -352,7 +352,7 @@ export default function CheckoutPage() {
             </button>
           </form>
 
-          <nav className="mt-12 flex flex-wrap gap-x-5 gap-y-2 border-t border-navy-100 pt-6 text-xs">
+          <nav className="mt-12 flex flex-wrap gap-x-5 gap-y-2 border-t border-ink-100 pt-6 text-xs">
             {[
               ['/pravno/vracila', 'Vračila'],
               ['/pravno/dostava', 'Dostava'],
@@ -360,14 +360,14 @@ export default function CheckoutPage() {
               ['/pravno/pogoji-poslovanja', 'Pogoji poslovanja'],
               ['/kontakt', 'Kontakt'],
             ].map(([to, label]) => (
-              <Link key={to} to={to} className="text-gold-700 underline hover:text-navy-900">
+              <Link key={to} to={to} className="text-brand-700 underline hover:text-ink-900">
                 {label}
               </Link>
             ))}
           </nav>
         </div>
 
-        <aside className="hidden bg-cream-100 px-10 py-12 lg:block lg:bg-transparent lg:pl-14">
+        <aside className="hidden bg-mist-100 px-10 py-12 lg:block lg:bg-transparent lg:pl-14">
           <div className="sticky top-12">
             <OrderSummary shipping={shippingPrice} paymentFee={paymentFee} paymentFeeLabel={payment ? `Strošek: ${payment.label}` : undefined} />
           </div>

@@ -2,7 +2,7 @@ import { ArrowRight, X } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '@/components/ui/Logo';
-import { learnLinks, shopLinks } from '@/components/layout/navigation';
+import { shopLinks, supportLinks } from '@/components/layout/navigation';
 
 export default function MobileMenu({ onClose }: { onClose: () => void }) {
   useEffect(() => {
@@ -14,13 +14,13 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="absolute inset-0 animate-fade-in bg-navy-950/50" onClick={onClose} />
+      <div className="absolute inset-0 animate-fade-in bg-ink-950/50" onClick={onClose} />
       <aside className="absolute inset-y-0 left-0 flex w-[88%] max-w-sm animate-slide-in-left flex-col bg-white">
-        <div className="flex h-[76px] items-center justify-between border-b border-navy-100 px-6">
+        <div className="flex h-[76px] items-center justify-between border-b border-ink-100 px-6">
           <div onClick={onClose}>
             <Logo />
           </div>
-          <button type="button" onClick={onClose} aria-label="Zapri meni" className="text-navy-900">
+          <button type="button" onClick={onClose} aria-label="Zapri meni" className="text-ink-900">
             <X className="h-6 w-6" strokeWidth={1.5} />
           </button>
         </div>
@@ -31,23 +31,20 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
               key={link.to}
               to={link.to}
               onClick={onClose}
-              className="flex items-center justify-between border-b border-navy-100 py-4 text-sm uppercase tracking-[0.18em] text-navy-900"
+              className="flex items-center justify-between border-b border-ink-100 py-4 text-base font-medium text-ink-900"
             >
               {link.label}
-              <ArrowRight className="h-4 w-4 text-gold-500" strokeWidth={1.5} />
+              <ArrowRight className="h-4 w-4 text-brand-600" strokeWidth={1.75} />
             </Link>
           ))}
-          <p className="eyebrow mb-4 mt-10">Spoznajte</p>
-          {learnLinks.map((link) => (
-            <Link key={link.to} to={link.to} onClick={onClose} className="block py-2.5 text-sm text-navy-800">
+          <p className="eyebrow mb-4 mt-10">Pomoč</p>
+          {supportLinks.slice(0, 4).map((link) => (
+            <Link key={link.to} to={link.to} onClick={onClose} className="block py-2.5 text-sm text-ink-800">
               {link.label}
             </Link>
           ))}
-          <Link to="/kontakt" onClick={onClose} className="mt-2 block py-2.5 text-sm text-navy-800">
-            Kontakt
-          </Link>
         </nav>
-        <div className="border-t border-navy-100 p-6">
+        <div className="border-t border-ink-100 p-6">
           <Link to="/prijava" onClick={onClose} className="btn-primary w-full">
             Prijava / Registracija
           </Link>

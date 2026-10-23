@@ -15,13 +15,13 @@ function Stat({ label, value, Icon, hint }: { label: string; value: string; Icon
   return (
     <div className="admin-card">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-navy-800/60">{label}</p>
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-50 text-gold-700">
+        <p className="text-sm text-ink-800/60">{label}</p>
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
           <Icon className="h-4 w-4" />
         </span>
       </div>
-      <p className="mt-3 text-2xl font-medium tracking-tight text-navy-900">{value}</p>
-      {hint && <p className="mt-1 text-xs text-navy-800/50">{hint}</p>}
+      <p className="mt-3 text-2xl font-medium tracking-tight text-ink-900">{value}</p>
+      {hint && <p className="mt-1 text-xs text-ink-800/50">{hint}</p>}
     </div>
   );
 }
@@ -80,27 +80,27 @@ export default function AdminOverviewPage() {
           <Card
             title="Zadnja naročila"
             actions={
-              <Link to="/admin/narocila" className="inline-flex items-center gap-1 text-sm text-navy-700 hover:text-navy-900">
+              <Link to="/admin/narocila" className="inline-flex items-center gap-1 text-sm text-ink-700 hover:text-ink-900">
                 Vsa naročila <ArrowRight className="h-4 w-4" />
               </Link>
             }
           >
             {recent.length === 0 ? (
-              <p className="py-8 text-center text-sm text-navy-800/50">Še ni naročil.</p>
+              <p className="py-8 text-center text-sm text-ink-800/50">Še ni naročil.</p>
             ) : (
-              <ul className="-mx-2 divide-y divide-navy-50">
+              <ul className="-mx-2 divide-y divide-ink-50">
                 {recent.map((o) => (
                   <li key={o.id}>
-                    <Link to={`/admin/narocila/${o.id}`} className="flex items-center justify-between gap-4 rounded-lg px-2 py-3 transition-colors hover:bg-navy-50/60">
+                    <Link to={`/admin/narocila/${o.id}`} className="flex items-center justify-between gap-4 rounded-lg px-2 py-3 transition-colors hover:bg-ink-50/60">
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-navy-900">
+                        <p className="text-sm font-medium text-ink-900">
                           {o.order_number} · {o.first_name} {o.last_name}
                         </p>
-                        <p className="text-xs text-navy-800/50">{formatDateTime(o.created_at)}</p>
+                        <p className="text-xs text-ink-800/50">{formatDateTime(o.created_at)}</p>
                       </div>
                       <div className="flex shrink-0 items-center gap-3">
                         <OrderStatusBadge status={o.status} />
-                        <span className="w-20 text-right text-sm font-medium text-navy-900">{formatEur(Number(o.total))}</span>
+                        <span className="w-20 text-right text-sm font-medium text-ink-900">{formatEur(Number(o.total))}</span>
                       </div>
                     </Link>
                   </li>
@@ -112,13 +112,13 @@ export default function AdminOverviewPage() {
 
         <Card title="Nizka zaloga" description="Izdelki s 3 kosi ali manj.">
           {lowStock.length === 0 ? (
-            <p className="py-6 text-center text-sm text-navy-800/50">Vse zaloge so v redu.</p>
+            <p className="py-6 text-center text-sm text-ink-800/50">Vse zaloge so v redu.</p>
           ) : (
             <ul className="space-y-3">
               {lowStock.map((p) => (
                 <li key={p.id}>
-                  <Link to={`/admin/izdelki/${p.id}`} className="flex items-center justify-between gap-3 text-sm hover:text-navy-700">
-                    <span className="flex min-w-0 items-center gap-2 text-navy-900">
+                  <Link to={`/admin/izdelki/${p.id}`} className="flex items-center justify-between gap-3 text-sm hover:text-ink-700">
+                    <span className="flex min-w-0 items-center gap-2 text-ink-900">
                       <AlertTriangle className={`h-4 w-4 shrink-0 ${p.stock === 0 ? 'text-red-500' : 'text-amber-500'}`} />
                       <span className="truncate">{p.name}</span>
                     </span>

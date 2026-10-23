@@ -48,15 +48,15 @@ export default function BestSellerCarousel({ items }: { items: Product[] }) {
           type="button"
           onClick={() => scroll(dir as 1 | -1)}
           aria-label={dir === -1 ? 'Prejšnji' : 'Naslednji'}
-          className={`absolute top-[32%] hidden h-12 w-12 items-center justify-center rounded-full bg-white text-navy-900 shadow-lg transition-all hover:bg-navy-900 hover:text-white md:flex ${
+          className={`absolute top-[32%] hidden h-12 w-12 items-center justify-center rounded-full bg-white text-ink-900 shadow-lg transition-all hover:bg-ink-900 hover:text-white md:flex ${
             dir === -1 ? 'left-4' : 'right-4'
           } ${(dir === -1 && progress < 0.01) || (dir === 1 && progress > 0.99) ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
         >
           {dir === -1 ? <ChevronLeft className="h-5 w-5" strokeWidth={1.5} /> : <ChevronRight className="h-5 w-5" strokeWidth={1.5} />}
         </button>
       ))}
-      <div className="mx-auto mt-12 h-0.5 w-48 bg-navy-100">
-        <div className="h-full bg-navy-900 transition-[margin] duration-300" style={{ width: `${barWidth}%`, marginLeft: `${progress * (100 - barWidth)}%` }} />
+      <div className="mx-auto mt-12 h-0.5 w-48 bg-ink-100">
+        <div className="h-full bg-ink-900 transition-[margin] duration-300" style={{ width: `${barWidth}%`, marginLeft: `${progress * (100 - barWidth)}%` }} />
       </div>
     </div>
   );

@@ -69,19 +69,19 @@ export default function AdminOrderDetailPage() {
 
   return (
     <div className="animate-fade-in">
-      <Link to="/admin/narocila" className="mb-4 inline-flex items-center gap-1 text-sm text-navy-700 hover:text-navy-900 print:hidden">
+      <Link to="/admin/narocila" className="mb-4 inline-flex items-center gap-1 text-sm text-ink-700 hover:text-ink-900 print:hidden">
         <ArrowLeft className="h-4 w-4" /> Vsa naročila
       </Link>
 
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-medium tracking-tight text-navy-900">Naročilo {order.order_number}</h1>
+            <h1 className="text-2xl font-medium tracking-tight text-ink-900">Naročilo {order.order_number}</h1>
             <OrderStatusBadge status={order.status} />
             <PaymentStatusBadge status={order.payment_status} />
           </div>
-          <p className="mt-1 text-sm text-navy-800/60">{formatDateTime(order.created_at)}</p>
-          {invoice && <p className="mt-1 text-xs text-gold-700">Račun: {invoice.invoice_number} · {new Intl.DateTimeFormat('sl-SI', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(invoice.invoice_issued_at))}</p>}
+          <p className="mt-1 text-sm text-ink-800/60">{formatDateTime(order.created_at)}</p>
+          {invoice && <p className="mt-1 text-xs text-brand-700">Račun: {invoice.invoice_number} · {new Intl.DateTimeFormat('sl-SI', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(invoice.invoice_issued_at))}</p>}
         </div>
         <div className="flex flex-wrap gap-2 print:hidden">
           <InvoiceButtons order={order} onGenerate={handleGenerate} invoice={invoice} loading={invLoading} />
@@ -97,7 +97,7 @@ export default function AdminOrderDetailPage() {
       </div>
 
       {showInvoice && invoice && store && (
-        <div className="mb-8 rounded-xl border border-navy-100 bg-white print:block">
+        <div className="mb-8 rounded-xl border border-ink-100 bg-white print:block">
           <InvoiceDocument order={order} invoice={invoice} store={store} />
         </div>
       )}
@@ -105,25 +105,25 @@ export default function AdminOrderDetailPage() {
       <div className="grid gap-6 lg:grid-cols-3 print:hidden">
         <div className="space-y-6 lg:col-span-2">
           <Card title="Izdelki">
-            <ul className="divide-y divide-navy-50">
+            <ul className="divide-y divide-ink-50">
               {items.map((item) => (
                 <li key={item.id} className="flex items-center gap-4 py-3">
-                  <span className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream-100">
+                  <span className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mist-100">
                     {item.image && <img src={item.image} alt="" className="h-full w-full object-cover" />}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-navy-900">{item.name}</p>
-                    <p className="text-xs text-navy-800/60">
+                    <p className="font-medium text-ink-900">{item.name}</p>
+                    <p className="text-xs text-ink-800/60">
                       {item.size}
                       {item.subscribe && ' · naročnina'} · {item.qty} × {formatEur(Number(item.unit_price))}
                     </p>
                   </div>
-                  <span className="font-medium text-navy-900">{formatEur(Number(item.total))}</span>
+                  <span className="font-medium text-ink-900">{formatEur(Number(item.total))}</span>
                 </li>
               ))}
             </ul>
-            <dl className="mt-4 space-y-2 border-t border-navy-100 pt-4 text-sm">
-              <div className="flex justify-between text-navy-800/70">
+            <dl className="mt-4 space-y-2 border-t border-ink-100 pt-4 text-sm">
+              <div className="flex justify-between text-ink-800/70">
                 <dt>Vmesni seštevek</dt>
                 <dd>{formatEur(Number(order.subtotal))}</dd>
               </div>
@@ -133,17 +133,17 @@ export default function AdminOrderDetailPage() {
                   <dd>-{formatEur(Number(order.discount))}</dd>
                 </div>
               )}
-              <div className="flex justify-between text-navy-800/70">
+              <div className="flex justify-between text-ink-800/70">
                 <dt>Dostava ({order.shipping_label})</dt>
                 <dd>{Number(order.shipping_cost) === 0 ? 'Brezplačno' : formatEur(Number(order.shipping_cost))}</dd>
               </div>
               {Number(order.payment_fee) > 0 && (
-                <div className="flex justify-between text-navy-800/70">
+                <div className="flex justify-between text-ink-800/70">
                   <dt>Strošek plačila</dt>
                   <dd>{formatEur(Number(order.payment_fee))}</dd>
                 </div>
               )}
-              <div className="flex justify-between border-t border-navy-100 pt-2 text-base font-medium text-navy-900">
+              <div className="flex justify-between border-t border-ink-100 pt-2 text-base font-medium text-ink-900">
                 <dt>Skupaj</dt>
                 <dd>{formatEur(Number(order.total))}</dd>
               </div>
@@ -193,7 +193,7 @@ export default function AdminOrderDetailPage() {
 
         <div className="space-y-6">
           <Card title="Kupec">
-            <p className="font-medium text-navy-900">
+            <p className="font-medium text-ink-900">
               {order.first_name} {order.last_name}
             </p>
             {order.user_id ? (
@@ -206,20 +206,20 @@ export default function AdminOrderDetailPage() {
               </p>
             )}
             <div className="mt-3 space-y-2 text-sm">
-              <a href={`mailto:${order.email}`} className="flex items-center gap-2 text-navy-700 hover:text-navy-900">
+              <a href={`mailto:${order.email}`} className="flex items-center gap-2 text-ink-700 hover:text-ink-900">
                 <Mail className="h-4 w-4" /> {order.email}
               </a>
               {order.phone && (
-                <a href={`tel:${order.phone}`} className="flex items-center gap-2 text-navy-700 hover:text-navy-900">
+                <a href={`tel:${order.phone}`} className="flex items-center gap-2 text-ink-700 hover:text-ink-900">
                   <Phone className="h-4 w-4" /> {order.phone}
                 </a>
               )}
             </div>
-            {order.newsletter && <p className="mt-3 text-xs text-navy-800/50">Prijavljen na e-novice.</p>}
+            {order.newsletter && <p className="mt-3 text-xs text-ink-800/50">Prijavljen na e-novice.</p>}
           </Card>
 
           <Card title="Naslov za dostavo">
-            <address className="text-sm not-italic leading-relaxed text-navy-800">
+            <address className="text-sm not-italic leading-relaxed text-ink-800">
               {order.address}
               {order.address2 && (
                 <>
@@ -235,9 +235,9 @@ export default function AdminOrderDetailPage() {
           </Card>
 
           <Card title="Plačilo">
-            <p className="text-sm text-navy-900">{PAYMENT_METHOD_LABELS[order.payment_method] ?? order.payment_method}</p>
-            {order.payment_ref && <p className="mt-1 break-all text-xs text-navy-800/50">Ref: {order.payment_ref}</p>}
-            {order.payment_method === 'bank' && <p className="mt-2 text-xs text-navy-800/60">Sklic za nakazilo: {order.order_number}</p>}
+            <p className="text-sm text-ink-900">{PAYMENT_METHOD_LABELS[order.payment_method] ?? order.payment_method}</p>
+            {order.payment_ref && <p className="mt-1 break-all text-xs text-ink-800/50">Ref: {order.payment_ref}</p>}
+            {order.payment_method === 'bank' && <p className="mt-2 text-xs text-ink-800/60">Sklic za nakazilo: {order.order_number}</p>}
           </Card>
         </div>
       </div>

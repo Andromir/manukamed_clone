@@ -1,15 +1,16 @@
-export default function PageHero({ image, eyebrow, title, lead }: { image: string; eyebrow: string; title: string; lead?: string }) {
+import BrandBall from '@/components/ui/BrandBall';
+
+export default function PageHero({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
   return (
-    <section className="relative flex h-[56vh] min-h-[420px] items-end overflow-hidden">
-      <img src={image} alt="" className="absolute inset-0 h-full w-full animate-slow-zoom object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/40 to-navy-950/10" />
-      <div className="container-x relative pb-16 text-white sm:pb-20">
-        <p className="animate-fade-up text-xs font-medium uppercase tracking-widest2 text-gold-300">{eyebrow}</p>
-        <h1 className="mt-4 max-w-3xl animate-fade-up text-4xl font-normal uppercase leading-tight tracking-[0.12em] sm:text-6xl" style={{ animationDelay: '0.1s' }}>
+    <section className="relative overflow-hidden bg-ink-950 text-white">
+      <BrandBall className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 sm:h-[26rem] sm:w-[26rem]" />
+      <div className="container-x relative py-16 sm:py-24">
+        <p className="animate-fade-up text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">{eyebrow}</p>
+        <h1 className="mt-4 max-w-3xl animate-fade-up font-display text-4xl font-bold tracking-tight sm:text-6xl" style={{ animationDelay: '0.1s' }}>
           {title}
         </h1>
         {lead && (
-          <p className="accent-serif mt-6 max-w-2xl animate-fade-up text-xl text-white/90 sm:text-2xl" style={{ animationDelay: '0.2s' }}>
+          <p className="mt-6 max-w-2xl animate-fade-up text-base leading-relaxed text-ink-200 sm:text-lg" style={{ animationDelay: '0.2s' }}>
             {lead}
           </p>
         )}

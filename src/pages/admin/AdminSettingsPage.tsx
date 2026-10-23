@@ -79,14 +79,14 @@ export default function AdminSettingsPage() {
     <div className="animate-fade-in">
       <PageHeader title="Nastavitve trgovine" description="Plačila, dostava, kode za popust in splošni podatki." />
 
-      <div className="mb-6 flex gap-1 overflow-x-auto border-b border-navy-100">
+      <div className="mb-6 flex gap-1 overflow-x-auto border-b border-ink-100">
         {tabs.map((t) => (
           <button
             key={t.id}
             type="button"
             onClick={() => setParams({ zavihek: t.id }, { replace: true })}
             className={`-mb-px whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
-              tab === t.id ? 'border-navy-900 text-navy-900' : 'border-transparent text-navy-800/60 hover:text-navy-900'
+              tab === t.id ? 'border-ink-900 text-ink-900' : 'border-transparent text-ink-800/60 hover:text-ink-900'
             }`}
           >
             {t.label}
