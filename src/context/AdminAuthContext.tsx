@@ -1,6 +1,6 @@
 import type { Session } from '@supabase/supabase-js';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { supabase } from '@/lib/supabase';
+import { callFunction, supabase } from '@/lib/supabase';
 
 interface AdminAuthValue {
   session: Session | null;
@@ -34,8 +34,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       return;
     }
-    const { data } = await supabase.rpc('is_admin');
-    setIsAdmin(data === true);
+    const res = await callFunction<{ admin: boolean }>('store-query', { action: 'check_admin' }, next?.access_token).catch(() => null);
+    setIsAdmin(res?.admin === true);
     setLoading(false);
   }, []);
 
@@ -52,8 +52,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const signIn = useCallback(async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return authMessage(error.message);
-    const { data: admin } = await supabase.rpc('is_admin');
-    if (admin !== true) {
+    const check = await callFunction<{ admin: boolean }>('store-query', { action: 'check_admin' }, data.session?.access_token).catch(() => null);
+    if (check?.admin !== true) {
       await supabase.auth.signOut();
       return 'Ta račun nima skrbniških pravic.';
     }
@@ -65,8 +65,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) return authMessage(error.message);
     if (!data.session) return 'Račun je ustvarjen, vendar prijava ni uspela. Poskusite se prijaviti.';
-    const { data: claimed, error: claimError } = await supabase.rpc('claim_first_admin');
-    if (claimError || claimed !== true) {
+    const claim = await callFunction<{ claimed: boolean }>('store-query', { action: 'claim_first_admin' }, data.session?.access_token).catch(() => null);
+    if (claim?.claimed !== true) {
       await supabase.auth.signOut();
       return 'Skrbniški račun že obstaja. Prijavite se z obstoječim računom.';
     }

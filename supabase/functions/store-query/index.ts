@@ -12,6 +12,18 @@ const json = (body: unknown, status = 200) =>
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 
+async function requireUser(req: Request) {
+  const token = req.headers.get("Authorization")?.replace(/^Bearer\s+/i, "") ?? "";
+  if (!token) return null;
+  const url = Deno.env.get("SUPABASE_URL")!;
+  const userClient = createClient(url, Deno.env.get("SUPABASE_ANON_KEY")!, {
+    global: { headers: { Authorization: `Bearer ${token}` } },
+  });
+  const { data, error } = await userClient.auth.getUser();
+  if (error || !data.user) return null;
+  return data.user;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 200, headers: corsHeaders });
 
@@ -27,6 +39,32 @@ Deno.serve(async (req: Request) => {
       const { data, error } = await db.rpc("admin_exists");
       if (error) throw error;
       return json({ exists: data === true });
+    }
+
+    if (action === "check_admin") {
+      const caller = await requireUser(req);
+      if (!caller) return json({ error: "Dostop zavrnjen." }, 401);
+      const { data, error } = await db.rpc("is_admin_user", { p_user_id: caller.id });
+      if (error) throw error;
+      return json({ admin: data === true });
+    }
+
+    if (action === "claim_first_admin") {
+      const caller = await requireUser(req);
+      if (!caller) return json({ error: "Dostop zavrnjen." }, 401);
+      const { data, error } = await db.rpc("admin_exists");
+      if (error) throw error;
+      if (data !== true) {
+        const { data: claimed, error: claimError } = await db.rpc("claim_first_admin_by_user", {
+          p_user_id: caller.id,
+          p_email: caller.email ?? "",
+        });
+        if (claimError) throw claimError;
+        return json({ claimed: claimed === true });
+      }
+      const { data: isAdmin, error: adminError } = await db.rpc("is_admin_user", { p_user_id: caller.id });
+      if (error) throw adminError;
+      return json({ claimed: isAdmin === true });
     }
 
     if (action === "check_discount") {
