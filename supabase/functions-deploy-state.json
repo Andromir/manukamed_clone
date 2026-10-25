@@ -13,6 +13,10 @@
       "hasChanged": false,
       "hash": "f784e5f6cf4f4aabbdd81d65d4a5f862a1bec0f8a35394a05df08c286af1ee13"
     },
+    "brandspot-publish": {
+      "hasChanged": false,
+      "hash": "0ffe2a71e815e05dfc65fa01bbe42494b59fa98d97c35770b34ae8e942000126"
+    },
     "create-order": {
       "hasChanged": false,
       "hash": "3c798abdb619b384b41d5e2a08715f2fa71ff5f5e38c29af0cad597e0fda7e59"
@@ -21,9 +25,9 @@
       "hasChanged": false,
       "hash": "5e745ca7b5e5be7fe7946566b2f6a5bc36b3d8c09efc4f2390ba606f8a0cbfe8"
     },
-    "brandspot-publish": {
+    "store-query": {
       "hasChanged": false,
-      "hash": "0ffe2a71e815e05dfc65fa01bbe42494b59fa98d97c35770b34ae8e942000126"
+      "hash": "288556e87c797885bfbed9454b7060d56d975f09b4f55d6ae86cc7cc5a6e46f7"
     }
   }
 }

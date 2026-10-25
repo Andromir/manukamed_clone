@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { unitPrice, type Product } from '@/data/products';
-import { supabase } from '@/lib/supabase';
+import { callFunction } from '@/lib/supabase';
 
 export interface CartLine {
   key: string;
@@ -92,9 +92,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const applyCode = useCallback(async (code: string) => {
     const normalized = code.trim().toUpperCase();
     if (!normalized) return false;
-    const { data, error } = await supabase.rpc('check_discount', { p_code: normalized });
-    const percent = Number(data);
-    if (error || data === null || !Number.isFinite(percent) || percent <= 0) return false;
+    const res = await callFunction<{ valid: boolean; percent?: number }>('store-query', {
+      action: 'check_discount',
+      code: normalized,
+    }).catch(() => null);
+    const percent = Number(res?.percent);
+    if (!res?.valid || !Number.isFinite(percent) || percent <= 0) return false;
     setDiscount({ code: normalized, percent });
     return true;
   }, []);

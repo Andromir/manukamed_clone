@@ -65,7 +65,6 @@ export default function AccountPage() {
       else setProfile({ first_name: '', last_name: '', phone: '', address: '', address2: '', postal_code: '', city: '', country: 'Slovenija', newsletter: false });
     });
     (async () => {
-      await supabase.rpc('link_my_orders');
       const { data } = await supabase
         .from('orders')
         .select('id, order_number, status, total, created_at')

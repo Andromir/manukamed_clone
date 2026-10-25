@@ -5,7 +5,7 @@ import { LoadingBlock, Notice, Spinner } from '@/components/admin/ui';
 import BrandBall from '@/components/ui/BrandBall';
 import Logo from '@/components/ui/Logo';
 import { useAdminAuth } from '@/context/AdminAuthContext';
-import { supabase } from '@/lib/supabase';
+import { callFunction } from '@/lib/supabase';
 
 export default function AdminLoginPage() {
   const { session, isAdmin, loading, signIn, createFirstAdmin } = useAdminAuth();
@@ -17,9 +17,9 @@ export default function AdminLoginPage() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    supabase.rpc('admin_exists').then(({ data, error: rpcError }) => {
-      setHasAdmin(rpcError ? true : data === true);
-    });
+    callFunction<{ exists: boolean }>('store-query', { action: 'admin_exists' })
+      .then((res) => setHasAdmin(res.exists === true))
+      .catch(() => setHasAdmin(true));
   }, []);
 
   if (loading || hasAdmin === null) return <LoadingBlock />;
