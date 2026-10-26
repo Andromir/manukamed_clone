@@ -76,4 +76,32 @@
   .no-scrollbar {
     scrollbar-width: none;
   }
+  .product-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .product-main-image {
+    height: 340px;
+    max-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .product-main-image {
+      height: 420px;
+      max-height: 420px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .product-main-image {
+      height: 500px;
+      max-height: 500px;
+    }
+  }
 }
