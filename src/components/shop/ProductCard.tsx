@@ -14,7 +14,7 @@ export default function ProductCard({ product, showDetails = true }: { product: 
 
   return (
     <article className="group flex h-full flex-col">
-      <Link to={href} className="product-card-image relative block rounded-2xl bg-mist-100">
+      <Link to={href} className="product-card-image relative block rounded-2xl bg-white">
         {product.badge && (
           <span className="absolute left-4 top-4 z-10 rounded-full bg-brand-600 px-3 py-1 text-[11px] font-semibold text-white">
             {product.badge}
@@ -29,13 +29,13 @@ export default function ProductCard({ product, showDetails = true }: { product: 
           src={product.images[0]}
           alt={product.name}
           loading="lazy"
-          className="absolute inset-0 h-[80%] w-[80%] object-contain object-center transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
+          className="absolute inset-0 m-auto h-full w-full object-contain object-center transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
         />
         <img
           src={product.images[1] ?? product.images[0]}
           alt=""
           loading="lazy"
-          className="absolute inset-0 m-auto h-[80%] w-[80%] scale-105 object-contain object-center opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-100"
+          className="absolute inset-0 m-auto h-full w-full scale-105 object-contain object-center opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-100"
         />
       </Link>
 
