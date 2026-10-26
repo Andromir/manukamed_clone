@@ -32,12 +32,12 @@ Deno.serve(async (req: Request) => {
     const { data: { user: caller }, error: cErr } = await userClient.auth.getUser();
     if (cErr || !caller) return json({ error: "Dostop zavrnjen." }, 403);
 
-    const { data: isAdmin, error: aErr } = await userClient.rpc("is_admin");
-    if (aErr || isAdmin !== true) return json({ error: "Dostop zavrnjen." }, 403);
-
     const db = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
       auth: { autoRefreshToken: false, persistSession: false },
     });
+    const { data: isAdmin, error: aErr } = await db.rpc("is_admin_user", { p_user_id: caller.id });
+    if (aErr || isAdmin !== true) return json({ error: "Dostop zavrnjen." }, 403);
+
     const body = await req.json();
     const action = body?.action;
 
