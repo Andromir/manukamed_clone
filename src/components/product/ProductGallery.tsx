@@ -6,7 +6,7 @@ export default function ProductGallery({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row-reverse">
-      <div className="product-main-image relative w-full overflow-hidden rounded-3xl bg-mist-100">
+      <div className="product-main-image relative w-full overflow-hidden rounded-3xl bg-white">
         {product.badge && (
           <span className="absolute left-5 top-5 z-10 rounded-full bg-brand-600 px-4 py-1.5 text-xs font-semibold text-white">
             {product.badge}
@@ -30,7 +30,7 @@ export default function ProductGallery({ product }: { product: Product }) {
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Slika ${i + 1}`}
-            className={`aspect-square h-[68px] w-[68px] shrink-0 overflow-hidden rounded-xl border-2 bg-mist-100 p-1.5 transition-all sm:h-auto sm:w-full ${
+            className={`aspect-square h-[68px] w-[68px] shrink-0 overflow-hidden rounded-xl border-2 bg-white p-1.5 transition-all sm:h-auto sm:w-full ${
               active === i ? 'border-brand-600' : 'border-transparent opacity-60 hover:opacity-100'
             }`}
           >
