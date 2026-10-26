@@ -63,7 +63,7 @@ Deno.serve(async (req: Request) => {
         return json({ claimed: claimed === true });
       }
       const { data: isAdmin, error: adminError } = await db.rpc("is_admin_user", { p_user_id: caller.id });
-      if (error) throw adminError;
+      if (adminError) throw adminError;
       return json({ claimed: isAdmin === true });
     }
 

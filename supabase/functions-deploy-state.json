@@ -3,7 +3,7 @@
   "functions": {
     "admin-create-order": {
       "hasChanged": false,
-      "hash": "15694e376b54686e7ca9474034a4d68ead842c8682a7c56794f1ea16ecac0740"
+      "hash": "a52e8976a5e8a592cf7863b1d4ec36e7401f6d67156b906cbf64cd05b807299a"
     },
     "admin-manage": {
       "hasChanged": false,
@@ -11,7 +11,7 @@
     },
     "admin-payments": {
       "hasChanged": false,
-      "hash": "f784e5f6cf4f4aabbdd81d65d4a5f862a1bec0f8a35394a05df08c286af1ee13"
+      "hash": "d15be828dbe58b2100d27e4e9d9dccd115b3481034462219d527f5a09643b62d"
     },
     "brandspot-publish": {
       "hasChanged": false,
@@ -27,7 +27,7 @@
     },
     "store-query": {
       "hasChanged": false,
-      "hash": "ef2a920c77ea4fbdad80207aa8c8ce794d0e8eeb81e4bf833fc143b2e1a2ae0d"
+      "hash": "781471712a20f97f96bfa9774ca7e6d1b0f2c3672e29f489da21919322bb458c"
     }
   }
 }
